@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using KOCR_Web.Models;
 using System.Diagnostics;
 using KOCR_Web.Services;
+using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace KOCR_Web.Controllers {
     public class OCRController : Controller {
@@ -23,6 +26,7 @@ namespace KOCR_Web.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DoOCR([FromForm] OCRViewModel model) {
+
 
             _ocrService.DoOCR("C:\\\\Work\\OCR Files\\phototest.tif", "C:\\\\Work\\OCR Files\\phototest");
 
