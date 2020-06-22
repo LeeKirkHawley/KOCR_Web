@@ -25,7 +25,7 @@ namespace KOCR_Web.Controllers {
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DoOCR([FromForm] OCRViewModel model) {
+        public ActionResult DoOCR([FromForm] IndexViewModel model) {
 
 
             _ocrService.DoOCR("C:\\\\Work\\OCR Files\\phototest.tif", "C:\\\\Work\\OCR Files\\phototest");

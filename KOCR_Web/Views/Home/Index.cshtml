@@ -1,5 +1,8 @@
-﻿@{
+﻿@using KOCR_Web.Models
+@model IndexViewModel
+@{
     ViewData["Title"] = "Home Page";
+    Layout = "_Layout";
 }
 
 <div class="text-center">
@@ -7,7 +10,13 @@
 </div>
 
 
-<form method="post" enctype="multipart/form-data" asp-controller="FileUpload" asp-action="Upload">
-    <input type="file" name="files" multiple/>
+<form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Index">
+    <input type="file" name="files" @*multiple*@/>
     <button type="submit">Upload</button>
 </form>
+
+<div class="ocrtext">
+    <pre >
+        @Model.OCRText
+    </pre>
+</div>
