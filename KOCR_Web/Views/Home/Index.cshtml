@@ -7,6 +7,7 @@
 </div>
 
 
-<form asp-controller="OCR" asp-action="DoOcr" method="post">
-    <button type="submit">OCR</button>
+<form method="post" enctype="multipart/form-data" asp-controller="FileUpload" asp-action="Upload">
+    <input type="file" name="files" multiple/>
+    <button type="submit">Upload</button>
 </form>
