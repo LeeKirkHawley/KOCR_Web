@@ -18,7 +18,7 @@ namespace KOCR_Web.Services {
             _settings = settings;
         }
 
-        public void OCRImageFile(string imageName, string outputBase) {
+        public async void OCRImageFile(string imageName, string outputBase) {
 
             string TessPath = Path.Combine(_settings["TesseractPath"], "tesseract.exe");
            
@@ -36,7 +36,7 @@ namespace KOCR_Web.Services {
             // p.WaitForExit();
             // Read the output stream first and then wait.
             string output = p.StandardOutput.ReadToEnd();
-            p.WaitForExit();
+            await p.WaitForExitAsync(1000000);
         }
 
         public async Task OCRPDFFile(string pdfName, string outputFile) {
@@ -46,7 +46,7 @@ namespace KOCR_Web.Services {
 
             // convert pdf to tif
             using (System.Diagnostics.Process p = new Process()) {
-                string GhostscriptPath = Path.Combine(_settings["GhostscriptPath"], "gswin64.exe");
+                string GhostscriptPath = Path.Combine(_settings["GhostscriptPath"], "gswin64c.exe");  // 'c' version doesn't show ui window
 
                 p.StartInfo.UseShellExecute = false;
                 p.StartInfo.RedirectStandardOutput = true;
@@ -69,26 +69,6 @@ namespace KOCR_Web.Services {
 
             OCRImageFile(tifFileName, outputBase);
 
-            // ocr resulting tif
-            //using (System.Diagnostics.Process p = new Process()) {
-            //    string ImageMagickPath = Path.Combine(_settings["ImageMagickPath"], "convert.exe");
-
-            //    p.StartInfo.UseShellExecute = false;
-            //    p.StartInfo.RedirectStandardOutput = true;
-            //    p.StartInfo.FileName = ImageMagickPath;
-            //    //p.StartInfo.ArgumentList.Add("-density");
-            //    //p.StartInfo.ArgumentList.Add("600");
-            //    p.StartInfo.ArgumentList.Add(pdfName);
-            //    p.StartInfo.ArgumentList.Add(outputFile);
-            //    bool result = p.Start();
-            //    // Do not wait for the child process to exit before
-            //    // reading to the end of its redirected stream.
-            //    // p.WaitForExit();
-            //    // Read the output stream first and then wait.
-            //    string output = p.StandardOutput.ReadToEnd();
-            //    p.WaitForExit();
-            //}
         }
-
     }
 }
