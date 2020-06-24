@@ -1,0 +1,205 @@
+2020-06-24 14:35:51.1439 Info Message Template Auto Format enabled
+2020-06-24 14:35:51.1630 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 14:35:51.2360 Info Adding target FileTarget(Name=alldata)
+2020-06-24 14:35:51.2468 Info Adding target FileTarget(Name=otherFile-web)
+2020-06-24 14:35:51.2892 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 14:35:51.7676 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 14:35:51.7676 Info Message Template Auto Format enabled
+2020-06-24 14:35:51.7705 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 14:35:51.7705 Info Adding target FileTarget(Name=alldata)
+2020-06-24 14:35:51.7705 Info Adding target FileTarget(Name=otherFile-web)
+2020-06-24 14:35:51.7705 Info Closing old configuration.
+2020-06-24 14:35:51.8067 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 14:35:52.2315 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 14:35:52.2315 Info Message Template Auto Format enabled
+2020-06-24 14:35:52.2315 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 14:35:52.2315 Info Adding target FileTarget(Name=alldata)
+2020-06-24 14:35:52.2386 Info Adding target FileTarget(Name=otherFile-web)
+2020-06-24 14:35:52.2386 Info Closing old configuration.
+2020-06-24 14:35:52.2386 Info Validating config: TargetNames=alldata, otherFile-web, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 14:56:46.4288 Info Message Template Auto Format enabled
+2020-06-24 14:56:46.4449 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 14:56:46.5128 Info Adding target FileTarget(Name=alldata)
+2020-06-24 14:56:46.5224 Info Adding target FileTarget(Name=jobs)
+2020-06-24 14:56:46.5609 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 14:56:47.0210 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 14:56:47.0210 Info Message Template Auto Format enabled
+2020-06-24 14:56:47.0210 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 14:56:47.0210 Info Adding target FileTarget(Name=alldata)
+2020-06-24 14:56:47.0210 Info Adding target FileTarget(Name=jobs)
+2020-06-24 14:56:47.0210 Info Closing old configuration.
+2020-06-24 14:56:47.0565 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 14:56:55.1984 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 14:56:55.1984 Info Message Template Auto Format enabled
+2020-06-24 14:56:55.1984 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 14:56:55.1984 Info Adding target FileTarget(Name=alldata)
+2020-06-24 14:56:55.1984 Info Adding target FileTarget(Name=jobs)
+2020-06-24 14:56:55.1984 Info Closing old configuration.
+2020-06-24 14:56:55.2095 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 14:58:49.6192 Info Message Template Auto Format enabled
+2020-06-24 14:58:49.6350 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 14:58:49.6963 Info Adding target FileTarget(Name=alldata)
+2020-06-24 14:58:49.6963 Info Adding target FileTarget(Name=jobs)
+2020-06-24 14:58:49.7436 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 14:58:50.2082 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 14:58:50.2082 Info Message Template Auto Format enabled
+2020-06-24 14:58:50.2082 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 14:58:50.2082 Info Adding target FileTarget(Name=alldata)
+2020-06-24 14:58:50.2082 Info Adding target FileTarget(Name=jobs)
+2020-06-24 14:58:50.2082 Info Closing old configuration.
+2020-06-24 14:58:50.2440 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 14:58:52.7712 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 14:58:52.7712 Info Message Template Auto Format enabled
+2020-06-24 14:58:52.7712 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 14:58:52.7712 Info Adding target FileTarget(Name=alldata)
+2020-06-24 14:58:52.7712 Info Adding target FileTarget(Name=jobs)
+2020-06-24 14:58:52.7712 Info Closing old configuration.
+2020-06-24 14:58:52.7712 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:05:17.6867 Info Message Template Auto Format enabled
+2020-06-24 15:05:17.7067 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:05:17.7768 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:05:17.7866 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:05:17.8266 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:05:18.2785 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:05:18.2785 Info Message Template Auto Format enabled
+2020-06-24 15:05:18.2785 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:05:18.2785 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:05:18.2785 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:05:18.2863 Info Closing old configuration.
+2020-06-24 15:05:18.3121 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:05:47.1803 Info Message Template Auto Format enabled
+2020-06-24 15:05:47.1970 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:05:47.2705 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:05:47.2705 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:05:47.3265 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:05:47.7654 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:05:47.7654 Info Message Template Auto Format enabled
+2020-06-24 15:05:47.7699 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:05:47.7699 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:05:47.7699 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:05:47.7699 Info Closing old configuration.
+2020-06-24 15:05:47.8014 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:05:54.1023 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:05:54.1023 Info Message Template Auto Format enabled
+2020-06-24 15:05:54.1023 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:05:54.1023 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:05:54.1023 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:05:54.1023 Info Closing old configuration.
+2020-06-24 15:05:54.1162 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:08:58.1795 Info Message Template Auto Format enabled
+2020-06-24 15:08:58.1949 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:08:58.2564 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:08:58.2564 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:08:58.3068 Info Validating config: TargetNames=alldata, ConfigItems=44, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:08:58.3068 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: jobs
+2020-06-24 15:08:58.7471 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:08:58.7471 Info Message Template Auto Format enabled
+2020-06-24 15:08:58.7471 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:08:58.7471 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:08:58.7471 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:08:58.7471 Info Closing old configuration.
+2020-06-24 15:08:58.7736 Info Validating config: TargetNames=alldata, ConfigItems=44, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:08:58.7736 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: jobs
+2020-06-24 15:08:59.1230 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:08:59.1230 Info Message Template Auto Format enabled
+2020-06-24 15:08:59.1230 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:08:59.1230 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:08:59.1285 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:08:59.1285 Info Closing old configuration.
+2020-06-24 15:08:59.1285 Info Validating config: TargetNames=alldata, ConfigItems=44, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:08:59.1285 Warn Unused target detected. Add a rule for this target to the configuration. TargetName: jobs
+2020-06-24 15:12:44.3281 Info Message Template Auto Format enabled
+2020-06-24 15:12:44.3432 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:12:44.4034 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:12:44.4133 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:12:44.4520 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:12:44.9094 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:12:44.9107 Info Message Template Auto Format enabled
+2020-06-24 15:12:44.9107 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:12:44.9107 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:12:44.9107 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:12:44.9107 Info Closing old configuration.
+2020-06-24 15:12:44.9429 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:12:45.3134 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:12:45.3134 Info Message Template Auto Format enabled
+2020-06-24 15:12:45.3134 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:12:45.3178 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:12:45.3178 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:12:45.3178 Info Closing old configuration.
+2020-06-24 15:12:45.3178 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:14:13.0029 Info Message Template Auto Format enabled
+2020-06-24 15:14:13.0169 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:14:13.0846 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:14:13.0846 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:14:13.1277 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:14:13.5582 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:14:13.5582 Info Message Template Auto Format enabled
+2020-06-24 15:14:13.5582 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:14:13.5582 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:14:13.5582 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:14:13.5582 Info Closing old configuration.
+2020-06-24 15:14:13.5919 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:14:13.9549 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:14:13.9549 Info Message Template Auto Format enabled
+2020-06-24 15:14:13.9570 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:14:13.9570 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:14:13.9570 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:14:13.9570 Info Closing old configuration.
+2020-06-24 15:14:13.9570 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:16:12.4427 Info Message Template Auto Format enabled
+2020-06-24 15:16:12.4427 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:16:12.5153 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:16:12.5248 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:16:12.5677 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:16:12.9698 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:16:12.9698 Info Message Template Auto Format enabled
+2020-06-24 15:16:12.9726 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:16:12.9726 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:16:12.9726 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:16:12.9726 Info Closing old configuration.
+2020-06-24 15:16:12.9999 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:16:13.3993 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:16:13.3993 Info Message Template Auto Format enabled
+2020-06-24 15:16:13.3993 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:16:13.3993 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:16:13.3993 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:16:13.3993 Info Closing old configuration.
+2020-06-24 15:16:13.4109 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:17:26.5041 Info Message Template Auto Format enabled
+2020-06-24 15:17:26.5210 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:17:26.5858 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:17:26.5858 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:17:26.6322 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:17:27.0460 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:17:27.0460 Info Message Template Auto Format enabled
+2020-06-24 15:17:27.0460 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:17:27.0460 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:17:27.0542 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:17:27.0542 Info Closing old configuration.
+2020-06-24 15:17:27.0788 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:17:27.4906 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:17:27.4906 Info Message Template Auto Format enabled
+2020-06-24 15:17:27.4906 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:17:27.4906 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:17:27.4906 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:17:27.4906 Info Closing old configuration.
+2020-06-24 15:17:27.4906 Info Validating config: TargetNames=alldata, jobs, ConfigItems=45, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:18:31.9565 Info Message Template Auto Format enabled
+2020-06-24 15:18:31.9565 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:18:32.0292 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:18:32.0292 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:18:32.0779 Info Validating config: TargetNames=alldata, jobs, ConfigItems=41, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:18:32.4972 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:18:32.4972 Info Message Template Auto Format enabled
+2020-06-24 15:18:32.4972 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:18:32.4972 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:18:32.4972 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:18:32.4972 Info Closing old configuration.
+2020-06-24 15:18:32.5268 Info Validating config: TargetNames=alldata, jobs, ConfigItems=41, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-06-24 15:18:32.9158 Info Configuring from an XML element in C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config...
+2020-06-24 15:18:32.9158 Info Message Template Auto Format enabled
+2020-06-24 15:18:32.9158 Info Loading assembly: NLog.Web.AspNetCore
+2020-06-24 15:18:32.9158 Info Adding target FileTarget(Name=alldata)
+2020-06-24 15:18:32.9158 Info Adding target FileTarget(Name=jobs)
+2020-06-24 15:18:32.9158 Info Closing old configuration.
+2020-06-24 15:18:32.9264 Info Validating config: TargetNames=alldata, jobs, ConfigItems=41, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config

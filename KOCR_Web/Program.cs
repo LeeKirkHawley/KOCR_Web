@@ -6,10 +6,19 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using NLog.Web;
+using NLog;
+
 
 namespace KOCR_Web {
     public class Program {
+
+        static Logger logger = null;
+
         public static void Main(string[] args) {
+            logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            logger.Debug("Entering Main()");
+
             CreateHostBuilder(args).Build().Run();
         }
 

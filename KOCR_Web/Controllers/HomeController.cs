@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Http;
 using KOCR_Web.Services;
 using Microsoft.Extensions.Configuration;
 using System.IO;
+using NLog.Web;
+using NLog;
+
 
 namespace KOCR_Web.Controllers {
     public class HomeController : Controller {
@@ -42,6 +45,13 @@ namespace KOCR_Web.Controllers {
 
         [HttpPost]
         public async Task<ActionResult> Index(IFormFile[] files) {
+
+            //_logger.LogInformation($"Processing {files[0].FileName}");
+
+            Logger jobLogger = LogManager.GetLogger("jobs");
+            jobLogger.Info($"OCR file {files[0].FileName}");
+
+
 
             // Extract file name from whatever was posted by browser
             var originalFileName = System.IO.Path.GetFileName(files[0].FileName);

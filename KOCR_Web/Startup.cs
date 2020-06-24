@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using KOCR_Web.Services;
+using NLog.Web;
+using NLog;
 
 namespace KOCR_Web {
     public class Startup {
@@ -20,6 +22,12 @@ namespace KOCR_Web {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            logger.Debug("Entering ConfigureServices()");
+
+            Logger jobLogger = LogManager.GetLogger("jobs");
+            jobLogger.Debug("job logger");
+
             services.AddControllersWithViews();
 
             services.AddTransient<OCRService>();
@@ -27,6 +35,10 @@ namespace KOCR_Web {
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) {
+
+            var logger = NLogBuilder.ConfigureNLog("nlog.config").GetCurrentClassLogger();
+            logger.Debug("Entering Configure()");
+
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             }
