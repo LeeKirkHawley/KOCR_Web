@@ -81,7 +81,8 @@ namespace KOCR_Web.Controllers {
             System.IO.File.Delete(textFilePath + ".txt");
 
             IndexViewModel model = new IndexViewModel {
-                OCRText = ocrText
+                OCRText = ocrText,
+                originalFileName = originalFileName
             };
 
 //            ViewBag.Message = "Files successfully uploaded";

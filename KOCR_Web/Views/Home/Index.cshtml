@@ -5,18 +5,19 @@
     Layout = "_Layout";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Index Page</h1>
-</div>
-
-
 <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Index">
-    <input type="file" name="files" @*multiple*@/>
+    <input type="file" name="files" @*multiple*@ />
     <button type="submit">Upload</button>
 </form>
 
-<div class="ocrtext">
-    <pre >
-        @Model.OCRText
-    </pre>
-</div>
+@if (Model.OCRText != null && Model.OCRText != "") {
+    <br />
+    <div>
+        @Model.originalFileName
+    </div>
+    <div class="ocrtext">
+        <pre>
+            @Model.OCRText
+        </pre>
+    </div>
+}

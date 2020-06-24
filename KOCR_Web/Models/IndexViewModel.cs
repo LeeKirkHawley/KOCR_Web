@@ -6,5 +6,6 @@ using System.Threading.Tasks;
 namespace KOCR_Web.Models {
     public class IndexViewModel {
         public string OCRText { get; set; }
+        public string originalFileName { get; set; }
     }
 }
