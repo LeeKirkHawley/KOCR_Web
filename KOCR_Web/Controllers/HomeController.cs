@@ -50,7 +50,8 @@ namespace KOCR_Web.Controllers {
 
             // set up the image file (input) path
             string imageFilePath = Path.Combine(_settings["ImageFilePath"], fileName);
-            imageFilePath += Path.GetExtension(originalFileName);
+            string imageFileExtension = Path.GetExtension(originalFileName);
+            imageFilePath += imageFileExtension;
 
             // set up the text file (output) path
             string textFilePath = Path.Combine(_settings["TextFilePath"], fileName);
@@ -66,7 +67,13 @@ namespace KOCR_Web.Controllers {
                 uploadedFile.CopyTo(localFile);
             }
 
-            _ocrService.DoOCR(imageFilePath, textFilePath);
+            if (imageFileExtension.ToLower() == ".pdf") {
+                _ocrService.OCRPDFFile(imageFilePath, textFilePath + ".tif");
+                
+            }
+            else {
+                _ocrService.OCRImageFile(imageFilePath, textFilePath);
+            }
 
             string ocrText = System.IO.File.ReadAllText(textFilePath + ".txt");
 

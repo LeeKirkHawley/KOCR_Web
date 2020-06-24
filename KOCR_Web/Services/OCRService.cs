@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,7 +16,7 @@ namespace KOCR_Web.Services {
             _settings = settings;
         }
 
-        public void DoOCR(string imageName, string outputBase) {
+        public void OCRImageFile(string imageName, string outputBase) {
 
             string TessPath = Path.Combine(_settings["TesseractPath"], "tesseract.exe");
            
@@ -34,6 +35,57 @@ namespace KOCR_Web.Services {
             // Read the output stream first and then wait.
             string output = p.StandardOutput.ReadToEnd();
             p.WaitForExit();
+        }
+
+        public void OCRPDFFile(string pdfName, string outputFile) {
+
+            string outputBase = _settings["TextFilePath"] + "\\" + Path.GetFileNameWithoutExtension(pdfName);
+            string tifFileName = outputBase + ".tif";
+
+            // convert pdf to tif
+            using (System.Diagnostics.Process p = new Process()) {
+                string GhostscriptPath = Path.Combine(_settings["GhostscriptPath"], "gswin64.exe");
+
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.FileName = GhostscriptPath;
+                p.StartInfo.ArgumentList.Add("-dNOPAUSE");
+                p.StartInfo.ArgumentList.Add("-r600");
+                p.StartInfo.ArgumentList.Add("-sDEVICE=tiffscaled24");
+                p.StartInfo.ArgumentList.Add("-sCompression=lzw");
+                p.StartInfo.ArgumentList.Add("-dBATCH");
+                p.StartInfo.ArgumentList.Add($"-sOutputFile={tifFileName}");
+                p.StartInfo.ArgumentList.Add(pdfName);
+                bool result = p.Start();
+                // Do not wait for the child process to exit before
+                // reading to the end of its redirected stream.
+                // p.WaitForExit();
+                // Read the output stream first and then wait.
+                string output = p.StandardOutput.ReadToEnd();
+                p.WaitForExit();
+            }
+
+            OCRImageFile(tifFileName, outputBase);
+
+            // ocr resulting tif
+            //using (System.Diagnostics.Process p = new Process()) {
+            //    string ImageMagickPath = Path.Combine(_settings["ImageMagickPath"], "convert.exe");
+
+            //    p.StartInfo.UseShellExecute = false;
+            //    p.StartInfo.RedirectStandardOutput = true;
+            //    p.StartInfo.FileName = ImageMagickPath;
+            //    //p.StartInfo.ArgumentList.Add("-density");
+            //    //p.StartInfo.ArgumentList.Add("600");
+            //    p.StartInfo.ArgumentList.Add(pdfName);
+            //    p.StartInfo.ArgumentList.Add(outputFile);
+            //    bool result = p.Start();
+            //    // Do not wait for the child process to exit before
+            //    // reading to the end of its redirected stream.
+            //    // p.WaitForExit();
+            //    // Read the output stream first and then wait.
+            //    string output = p.StandardOutput.ReadToEnd();
+            //    p.WaitForExit();
+            //}
         }
     }
 }
