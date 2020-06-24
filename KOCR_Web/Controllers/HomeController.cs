@@ -41,7 +41,7 @@ namespace KOCR_Web.Controllers {
         }
 
         [HttpPost]
-        public IActionResult Index(IFormFile[] files) {
+        public async Task<ActionResult> Index(IFormFile[] files) {
 
             // Extract file name from whatever was posted by browser
             var originalFileName = System.IO.Path.GetFileName(files[0].FileName);
@@ -68,7 +68,7 @@ namespace KOCR_Web.Controllers {
             }
 
             if (imageFileExtension.ToLower() == ".pdf") {
-                _ocrService.OCRPDFFile(imageFilePath, textFilePath + ".tif");
+                await _ocrService.OCRPDFFile(imageFilePath, textFilePath + ".tif");
                 
             }
             else {

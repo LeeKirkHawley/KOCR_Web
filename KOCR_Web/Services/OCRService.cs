@@ -5,7 +5,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
+using KOCR_Web.Extensions;
 
 namespace KOCR_Web.Services {
     public class OCRService {
@@ -37,7 +39,7 @@ namespace KOCR_Web.Services {
             p.WaitForExit();
         }
 
-        public void OCRPDFFile(string pdfName, string outputFile) {
+        public async Task OCRPDFFile(string pdfName, string outputFile) {
 
             string outputBase = _settings["TextFilePath"] + "\\" + Path.GetFileNameWithoutExtension(pdfName);
             string tifFileName = outputBase + ".tif";
@@ -50,7 +52,7 @@ namespace KOCR_Web.Services {
                 p.StartInfo.RedirectStandardOutput = true;
                 p.StartInfo.FileName = GhostscriptPath;
                 p.StartInfo.ArgumentList.Add("-dNOPAUSE");
-                p.StartInfo.ArgumentList.Add("-r600");
+                p.StartInfo.ArgumentList.Add("-r300");
                 p.StartInfo.ArgumentList.Add("-sDEVICE=tiffscaled24");
                 p.StartInfo.ArgumentList.Add("-sCompression=lzw");
                 p.StartInfo.ArgumentList.Add("-dBATCH");
@@ -62,7 +64,7 @@ namespace KOCR_Web.Services {
                 // p.WaitForExit();
                 // Read the output stream first and then wait.
                 string output = p.StandardOutput.ReadToEnd();
-                p.WaitForExit();
+                await p.WaitForExitAsync(1000000);
             }
 
             OCRImageFile(tifFileName, outputBase);
@@ -87,5 +89,6 @@ namespace KOCR_Web.Services {
             //    p.WaitForExit();
             //}
         }
+
     }
 }

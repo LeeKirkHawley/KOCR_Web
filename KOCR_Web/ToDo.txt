@@ -1,1 +1,1 @@
-﻿PDF support
+﻿long-running ocr task?
