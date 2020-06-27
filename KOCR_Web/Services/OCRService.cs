@@ -8,17 +8,25 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using KOCR_Web.Extensions;
+using NLog.Web;
+using NLog;
+using Microsoft.Extensions.Logging;
 
 namespace KOCR_Web.Services {
     public class OCRService {
 
         private readonly IConfiguration _settings;
+        private readonly Logger _debugLogger;
 
         public OCRService(IConfiguration settings) {
             _settings = settings;
+
+            _debugLogger = LogManager.GetLogger("debugLogger");
         }
 
         public async void OCRImageFile(string imageName, string outputBase) {
+
+            _debugLogger.Debug("Entering OCRImageFile()");
 
             string TessPath = Path.Combine(_settings["TesseractPath"], "tesseract.exe");
            
@@ -30,13 +38,19 @@ namespace KOCR_Web.Services {
             p.StartInfo.FileName = TessPath;
             p.StartInfo.ArgumentList.Add(imageName);
             p.StartInfo.ArgumentList.Add(outputBase);
-            p.Start();
-            // Do not wait for the child process to exit before
-            // reading to the end of its redirected stream.
-            // p.WaitForExit();
-            // Read the output stream first and then wait.
-            string output = p.StandardOutput.ReadToEnd();
-            await p.WaitForExitAsync(1000000);
+
+            try {
+                p.Start();
+                // Do not wait for the child process to exit before
+                // reading to the end of its redirected stream.
+                // p.WaitForExit();
+                // Read the output stream first and then wait.
+                string output = p.StandardOutput.ReadToEnd();
+                await p.WaitForExitAsync(1000000);
+            }
+            catch(Exception ex) {
+                _debugLogger.Debug(ex, "Couldn't run Tesseract");
+            }
         }
 
         public async Task OCRPDFFile(string pdfName, string outputFile) {
