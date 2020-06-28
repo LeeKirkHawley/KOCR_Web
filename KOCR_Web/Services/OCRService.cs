@@ -26,7 +26,7 @@ namespace KOCR_Web.Services {
 
         public async void OCRImageFile(string imageName, string outputBase) {
 
-            _debugLogger.Debug("Entering OCRImageFile()");
+            //_debugLogger.Debug("Entering OCRImageFile()");
 
             string TessPath = Path.Combine(_settings["TesseractPath"], "tesseract.exe");
            

@@ -12,7 +12,7 @@ using System.IO;
 using Microsoft.Extensions.Configuration;
 using NLog.Web;
 using NLog;
-
+using System.Threading;
 
 namespace KOCR_Web.Controllers {
     public class HomeController : Controller {
@@ -49,17 +49,19 @@ namespace KOCR_Web.Controllers {
         [HttpPost]
         public async Task<ActionResult> Index(IFormFile[] files) {
 
-            _debugLogger.Info($"Entering HomeController.Index()");
+            //_debugLogger.Debug($"Entering HomeController.Index()");
+            DateTime startTime = DateTime.Now;
 
             string file = "";
             try {
-                file = $"OCR file {files[0].FileName}";
+                file = $"{files[0].FileName}";
             }
             catch (Exception ex) {
                 _debugLogger.Debug(ex, "Exception reading file name.");
             }
 
-            _jobLogger.Info(file);
+            _jobLogger.Info($"OCR file {file}");
+            _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Processing file {file}");
 
             // Extract file name from whatever was posted by browser
             var originalFileName = System.IO.Path.GetFileName(files[0].FileName);
@@ -71,8 +73,8 @@ namespace KOCR_Web.Controllers {
             string imageFileExtension = Path.GetExtension(originalFileName);
             imageFilePath += imageFileExtension;
 
-            _debugLogger.Info($"ImageFilePath: {imageFilePath}");
-            _debugLogger.Info($"Current: {Directory.GetCurrentDirectory()}");
+            //_debugLogger.Info($"ImageFilePath: {imageFilePath}");
+            //_debugLogger.Info($"Current: {Directory.GetCurrentDirectory()}");
 
             // set up the text file (output) path
             string textFilePath = Path.Combine(_settings["TextFilePath"], fileName);
@@ -125,7 +127,12 @@ namespace KOCR_Web.Controllers {
                 originalFileName = originalFileName
             };
 
-            _debugLogger.Info($"Leaving HomeController.Index()");
+            DateTime finishTime = DateTime.Now;
+            TimeSpan ts = (finishTime - startTime);
+            string duration = ts.ToString(@"hh\:mm\:ss");
+
+            _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Finished processing file {file}: {duration}");
+            //_debugLogger.Debug($"Leaving HomeController.Index()");
 
             return View(model);
         }
