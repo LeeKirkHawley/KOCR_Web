@@ -21,8 +21,6 @@ namespace KOCR_Web.Controllers {
         private readonly Logger _debugLogger;
         private readonly Logger _jobLogger;
 
-
-
         public HomeController(IConfiguration settings, OCRService ocrService) {
             _settings = settings;
             _ocrService = ocrService;
