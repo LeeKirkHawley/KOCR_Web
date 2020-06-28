@@ -53,36 +53,18 @@ namespace KOCR_Web.Controllers {
 
             string file = "";
             try {
-                _debugLogger.Info($"HomeController.Index() 1");
                 file = $"OCR file {files[0].FileName}";
-                _debugLogger.Info($"HomeController.Index() 2");
             }
             catch (Exception ex) {
                 _debugLogger.Debug(ex, "Exception reading file name.");
             }
-            _debugLogger.Info($"HomeController.Index() 3");
 
             _jobLogger.Info(file);
-
-            _debugLogger.Info($"HomeController.Index() 4");
-
-            //if (!Directory.Exists(_settings["ImageFilePath"]))
-            //    Directory.CreateDirectory(_settings["ImageFilePath"]);
-            //if (!Directory.Exists(_settings["TextFilePath"]))
-            //    Directory.CreateDirectory(_settings["TextFilePath"]);
-
-            _debugLogger.Info($"HomeController.Index() 5");
 
             // Extract file name from whatever was posted by browser
             var originalFileName = System.IO.Path.GetFileName(files[0].FileName);
 
-            _debugLogger.Info($"HomeController.Index() 6");
-
-
             var fileName = Guid.NewGuid().ToString();
-
-            _debugLogger.Info($"HomeController.Index() 7");
-
 
             // set up the image file (input) path
             string imageFilePath = Path.Combine(_settings["ImageFilePath"], fileName);
@@ -92,19 +74,13 @@ namespace KOCR_Web.Controllers {
             _debugLogger.Info($"ImageFilePath: {imageFilePath}");
             _debugLogger.Info($"Current: {Directory.GetCurrentDirectory()}");
 
-            _debugLogger.Info($"HomeController.Index() 8");
-
             // set up the text file (output) path
             string textFilePath = Path.Combine(_settings["TextFilePath"], fileName);
-
-            _debugLogger.Info($"HomeController.Index() 9");
 
             // If file with same name exists delete it
             if (System.IO.File.Exists(imageFilePath)) {
                 System.IO.File.Delete(imageFilePath);
             }
-
-            _debugLogger.Info($"HomeController.Index() 10");
 
             // Create new local file and copy contents of uploaded file
             try {
@@ -118,8 +94,6 @@ namespace KOCR_Web.Controllers {
                 // HANDLE ERROR
             }
 
-            _debugLogger.Info($"HomeController.Index() 11");
-
             if (imageFileExtension.ToLower() == ".pdf") {
                 await _ocrService.OCRPDFFile(imageFilePath, textFilePath + ".tif");
                 
@@ -128,8 +102,6 @@ namespace KOCR_Web.Controllers {
                 _ocrService.OCRImageFile(imageFilePath, textFilePath);
             }
 
-            _debugLogger.Info($"HomeController.Index() 12");
-
             string textFileName = textFilePath + ".txt";
             string ocrText = "";
             try {
@@ -137,9 +109,6 @@ namespace KOCR_Web.Controllers {
             }
             catch(Exception ex) {
                 _debugLogger.Debug($"Couldn't read text file {textFileName}");
-
-
-                _debugLogger.Info($"HomeController.Index() 13");// HANDLE ERROR
             }
 
             try {
@@ -151,14 +120,10 @@ namespace KOCR_Web.Controllers {
                 // HANDLE ERROR
             }
 
-            _debugLogger.Info($"HomeController.Index() 14");
-
             IndexViewModel model = new IndexViewModel {
                 OCRText = ocrText,
                 originalFileName = originalFileName
             };
-
-            _debugLogger.Info($"HomeController.Index() 15");
 
             _debugLogger.Info($"Leaving HomeController.Index()");
 
