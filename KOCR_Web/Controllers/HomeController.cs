@@ -43,11 +43,14 @@ namespace KOCR_Web.Controllers {
             if (model.OCRText == null) {
                 model.OCRText = "";
             }
+            model.Languages = _ocrService.SetupLanguages();
+            model.Language = "eng";
+
             return View(model);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Index(IFormFile[] files) {
+        public async Task<ActionResult> Index(IndexViewModel model, IFormFile[] files) {
 
             //_debugLogger.Debug($"Entering HomeController.Index()");
             DateTime startTime = DateTime.Now;
@@ -97,11 +100,11 @@ namespace KOCR_Web.Controllers {
             }
 
             if (imageFileExtension.ToLower() == ".pdf") {
-                await _ocrService.OCRPDFFile(imageFilePath, textFilePath + ".tif");
+                await _ocrService.OCRPDFFile(imageFilePath, textFilePath + ".tif", model.Language);
                 
             }
             else {
-                _ocrService.OCRImageFile(imageFilePath, textFilePath);
+                _ocrService.OCRImageFile(imageFilePath, textFilePath, model.Language);
             }
 
             string textFileName = textFilePath + ".txt";
@@ -113,6 +116,10 @@ namespace KOCR_Web.Controllers {
                 _debugLogger.Debug($"Couldn't read text file {textFileName}");
             }
 
+            if(ocrText == "") {
+                ocrText = "No text found.";
+            }
+
             try {
                 System.IO.File.Delete(imageFilePath);
                 System.IO.File.Delete(textFilePath + ".txt");
@@ -122,10 +129,10 @@ namespace KOCR_Web.Controllers {
                 // HANDLE ERROR
             }
 
-            IndexViewModel model = new IndexViewModel {
-                OCRText = ocrText,
-                originalFileName = originalFileName
-            };
+            // update model for display of ocr'ed data
+            model.OCRText = ocrText;
+            model.OriginalFileName = originalFileName;
+            model.Languages = _ocrService.SetupLanguages();
 
             DateTime finishTime = DateTime.Now;
             TimeSpan ts = (finishTime - startTime);

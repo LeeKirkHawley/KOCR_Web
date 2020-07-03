@@ -5,15 +5,19 @@
     Layout = "_Layout";
 }
 
-<form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Index">
-    <input type="file" name="files" @*multiple*@ />
-    <button type="submit">Upload</button>
-</form>
+    <form method="post" enctype="multipart/form-data" asp-controller="Home" asp-action="Index">
+        <input type="file" name="files" @*multiple*@ />
+        <button type="submit">Upload</button>
+        <br />
+        <b>Select Language: </b>
+        <select asp-for="Language" asp-items="Model.Languages"></select>
+        <br />
+    </form>
 
 @if (Model.OCRText != null && Model.OCRText != "") {
     <br />
     <div>
-        @Model.originalFileName
+        @Model.OriginalFileName
     </div>
     <div class="ocrtext">
         <pre>

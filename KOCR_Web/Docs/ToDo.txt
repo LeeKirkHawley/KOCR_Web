@@ -1,1 +1,4 @@
-﻿long-running ocr task?
+﻿KOCR domain
+OCR options
+improve UI
+Marketing info
