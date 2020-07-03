@@ -125,7 +125,7 @@ namespace KOCR_Web.Controllers {
                 System.IO.File.Delete(textFilePath + ".txt");
             }
             catch(Exception ex) {
-                _debugLogger.Debug("Failed to delete OCR files.");
+                _debugLogger.Debug(ex, "Failed to delete OCR files.");
                 // HANDLE ERROR
             }
 
