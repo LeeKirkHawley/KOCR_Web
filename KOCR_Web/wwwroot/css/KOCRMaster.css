@@ -9,13 +9,22 @@ h1 {
 
 .header {
     padding: 10px;
-    padding-top: 20px;
-    padding-bottom: 0;
     text-align: center;
     background: darkblue;
     color: orange;
-    font-size: 3.5rem;
     font-family: 'Special Elite', cursive;
+}
+
+.header-title {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.header-text {
+    padding-top: 50px;
+    padding-bottom: 30px;
+    font-size: .8rem;
+    text-align: center;
 }
 
 .ocrtext {
@@ -23,5 +32,6 @@ h1 {
     background-color: white;
     border: 5px solid orange;
 }
+
 
 

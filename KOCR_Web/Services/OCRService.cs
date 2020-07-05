@@ -103,7 +103,11 @@ namespace KOCR_Web.Services {
                 List<Language> languages = null;
                 languages = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Language>>(JSONtxt).ToList<Language>();
 
-                foreach (Language language in languages) {
+                IOrderedEnumerable<Language> lan = from element in languages
+                              orderby element.Text
+                              select element;
+
+                foreach (Language language in lan) {
                     languageItems.Add(new SelectListItem { Text = language.Text, Value = language.Value });
                 }
             }

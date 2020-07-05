@@ -27,13 +27,15 @@
 	{"Text":"Polish","Value":"pol"},
 	{"Text":"Portuguese","Value":"por"},
 	{"Text":"Russian","Value":"rus"},
-	{"Text":"Spanish; Castilian","Value":"spa"},
+	{"Text":"Spanish","Value":"spa"},
+	{"Text":"Castilian","Value":"spa"},
 	{"Text":"Swedish","Value":"swe"},
 	{"Text":"Tagalog","Value":"tgl"},
 	{"Text":"Tamil","Value":"tam"},
 	{"Text":"Thai","Value":"tha"},
 	{"Text":"Turkish","Value":"tur"},
-	{"Text":"Uighur; Uyghur","Value":"uig"},
+	{"Text":"Uighur","Value":"uig"},
+	{"Text":"Uyghur","Value":"uig"},
 	{"Text":"Vietnamese","Value":"vie"},
 	{"Text":"Yiddish","Value":"yid"}
 ]

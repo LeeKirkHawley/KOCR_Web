@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/KOCRMaster.css" />
 </head>
 <body>
-    <header>
+    @*<header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">KOCR</a>
@@ -29,14 +29,35 @@
                 </div>
             </div>
         </nav>
-    </header>
+    </header>*@
     <div class="container">
-        <main role="main" class="pb-3">
-            <div class="header" onclick="location.href = '@(Url.Action("Index", "Home"))'">
-                KOCR
+        <div class="row header">
+            <div class="col-sm header-text">
+                <p>
+                    Contact me for OCR services, including bulk OCR, scanning, or custom OCR special needs.
+                </p>
             </div>
-            @RenderBody()
-        </main>
+            <div class="col-sm header-title" onclick="location.href = '@(Url.Action("Index", "Home"))'">
+                <div>
+                    <h1>K-OCR</h1>
+                </div>
+                <div font-size: .8rem;>
+                    Free OCR
+                </div>
+            </div>
+            <div class="col-sm header-text">
+                <p>
+                    leekirkhawley@gmail.com
+                    <br />
+                    602-751-9025
+                    <br />
+                    <a asp-controller="Home" asp-action="AboutMe">About Me</a>
+                    <br />
+
+                </p>
+            </div>
+        </div>
+        @RenderBody()
     </div>
 
     <footer class="border-top footer text-muted">

@@ -143,5 +143,11 @@ namespace KOCR_Web.Controllers {
 
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult AboutMe() {
+            AboutMeViewModel model = new AboutMeViewModel();
+            return View(model);
+        }
     }
 }
