@@ -1,4 +1,7 @@
-﻿KOCR domain
+﻿Create ocr and image folders if not present
+Make production version load correct appsettings file
+Fix file cleanup problem
+KOCR domain
 OCR options
 improve UI
 Marketing info
