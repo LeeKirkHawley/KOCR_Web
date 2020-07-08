@@ -50,7 +50,7 @@ namespace KOCR_Web.Controllers {
         }
 
         [HttpPost]
-        //[RequestSizeLimit(100000)]
+        [RequestSizeLimit(1000000)]
         public async Task<ActionResult> Index(IndexViewModel model, IFormFile[] files) {
 
             //_debugLogger.Debug($"Entering HomeController.Index()");
