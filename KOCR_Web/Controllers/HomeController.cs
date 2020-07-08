@@ -50,6 +50,7 @@ namespace KOCR_Web.Controllers {
         }
 
         [HttpPost]
+        //[RequestSizeLimit(100000)]
         public async Task<ActionResult> Index(IndexViewModel model, IFormFile[] files) {
 
             //_debugLogger.Debug($"Entering HomeController.Index()");
@@ -66,14 +67,20 @@ namespace KOCR_Web.Controllers {
             _jobLogger.Info($"OCR file {file}");
             _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Processing file {file}");
 
+
             // Extract file name from whatever was posted by browser
             var originalFileName = System.IO.Path.GetFileName(files[0].FileName);
+            string imageFileExtension = Path.GetExtension(originalFileName);
+
+            // check file sizes
+            if (imageFileExtension.ToLower() == ".pdf") {
+
+            }
 
             var fileName = Guid.NewGuid().ToString();
 
             // set up the image file (input) path
             string imageFilePath = Path.Combine(_settings["ImageFilePath"], fileName);
-            string imageFileExtension = Path.GetExtension(originalFileName);
             imageFilePath += imageFileExtension;
 
             //_debugLogger.Info($"ImageFilePath: {imageFilePath}");
@@ -99,12 +106,14 @@ namespace KOCR_Web.Controllers {
                 // HANDLE ERROR
             }
 
+            string errorMsg = "";
+
             if (imageFileExtension.ToLower() == ".pdf") {
                 await _ocrService.OCRPDFFile(imageFilePath, textFilePath + ".tif", model.Language);
 
             }
             else {
-                _ocrService.OCRImageFile(imageFilePath, textFilePath, model.Language);
+                errorMsg = await _ocrService.OCRImageFile(imageFilePath, textFilePath, model.Language);
             }
 
             string textFileName = textFilePath + ".txt";
@@ -117,7 +126,10 @@ namespace KOCR_Web.Controllers {
             }
 
             if (ocrText == "") {
-                ocrText = "No text found.";
+                if (errorMsg == "")
+                    ocrText = "No text found.";
+                else
+                    ocrText = errorMsg;
             }
 
             // cleanup artifacts

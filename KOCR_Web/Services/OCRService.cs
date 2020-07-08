@@ -29,7 +29,7 @@ namespace KOCR_Web.Services {
             _debugLogger = LogManager.GetLogger("debugLogger");
         }
 
-        public async void OCRImageFile(string imageName, string outputBase, string language) {
+        public async Task<string> OCRImageFile(string imageName, string outputBase, string language) {
 
             //_debugLogger.Debug("Entering OCRImageFile()");
 
@@ -40,6 +40,7 @@ namespace KOCR_Web.Services {
             // Redirect the output stream of the child process.
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
             p.StartInfo.FileName = TessPath;
 
             p.StartInfo.ArgumentList.Add(imageName);
@@ -47,21 +48,27 @@ namespace KOCR_Web.Services {
             p.StartInfo.ArgumentList.Add("-l");
             p.StartInfo.ArgumentList.Add(language);
 
+            string returnMsg = "";
             try {
                 p.Start();
-                // Do not wait for the child process to exit before
-                // reading to the end of its redirected stream.
-                // p.WaitForExit();
-                // Read the output stream first and then wait.
-                string output = p.StandardOutput.ReadToEnd();
+                string stdOutput = p.StandardOutput.ReadToEnd();
+                string errOutput = p.StandardError.ReadToEnd();
+                if(errOutput != "") {
+                    if(errOutput.Contains("Failed loading language")) {
+                        _debugLogger.Debug(errOutput);
+                        returnMsg =  "ERROR: Couldn't load language file " + language;
+                    }
+                }
                 await p.WaitForExitAsync(1000000);
             }
             catch(Exception ex) {
                 _debugLogger.Debug(ex, "Couldn't run Tesseract");
             }
+
+            return returnMsg;
         }
 
-        public async Task OCRPDFFile(string pdfName, string outputFile, string language) {
+        public async Task<string> OCRPDFFile(string pdfName, string outputFile, string language) {
 
             string outputBase = _settings["TextFilePath"] + "\\" + Path.GetFileNameWithoutExtension(pdfName);
             string tifFileName = outputBase + ".tif";
@@ -89,7 +96,7 @@ namespace KOCR_Web.Services {
                 await p.WaitForExitAsync(1000000);
             }
 
-            OCRImageFile(tifFileName, outputBase, language);
+            return await OCRImageFile(tifFileName, outputBase, language);
 
         }
 

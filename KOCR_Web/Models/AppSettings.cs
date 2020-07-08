@@ -10,5 +10,7 @@ namespace KOCR_Web.Models {
         string GhostscriptPath { get; set; }
         string ImageFilePath { get; set; }
         string TextFilePath { get; set; }
+        string MaxPDFSize { get; set; }
+        string MaxTextSize { get; set; }
     }
 }
