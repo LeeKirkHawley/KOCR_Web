@@ -218,5 +218,19 @@ namespace KOCR_Web.Services {
             //languageItems.Add(new SelectListItem { Text = "Yiddish", Value = "yid" });
 
         }
+
+        public void Cleanup(string imageFilePath, string imageFileExtension, string textFilePath) {
+            try {
+                System.IO.File.Delete(imageFilePath);
+                System.IO.File.Delete(textFilePath + ".txt");
+                if (imageFileExtension.ToLower() == ".pdf") {
+                    System.IO.File.Delete(textFilePath + ".tif");
+                }
+            }
+            catch (Exception ex) {
+                _debugLogger.Debug(ex, "Failed to delete OCR files.");
+                // HANDLE ERROR
+            }
+        }
     }
 }

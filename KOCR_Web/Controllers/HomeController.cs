@@ -94,14 +94,14 @@ namespace KOCR_Web.Controllers {
                     uploadedFile.CopyTo(localFile);
                 }
             }
-            catch(Exception ex) {
+            catch (Exception ex) {
                 _debugLogger.Debug($"Couldn't write file {imageFilePath}");
                 // HANDLE ERROR
             }
 
             if (imageFileExtension.ToLower() == ".pdf") {
                 await _ocrService.OCRPDFFile(imageFilePath, textFilePath + ".tif", model.Language);
-                
+
             }
             else {
                 _ocrService.OCRImageFile(imageFilePath, textFilePath, model.Language);
@@ -112,22 +112,16 @@ namespace KOCR_Web.Controllers {
             try {
                 ocrText = System.IO.File.ReadAllText(textFileName);
             }
-            catch(Exception ex) {
+            catch (Exception ex) {
                 _debugLogger.Debug($"Couldn't read text file {textFileName}");
             }
 
-            if(ocrText == "") {
+            if (ocrText == "") {
                 ocrText = "No text found.";
             }
 
-            try {
-                System.IO.File.Delete(imageFilePath);
-                System.IO.File.Delete(textFilePath + ".txt");
-            }
-            catch(Exception ex) {
-                _debugLogger.Debug(ex, "Failed to delete OCR files.");
-                // HANDLE ERROR
-            }
+            // cleanup artifacts
+            _ocrService.Cleanup(imageFilePath, imageFileExtension, textFilePath);
 
             // update model for display of ocr'ed data
             model.OCRText = ocrText;
@@ -138,7 +132,7 @@ namespace KOCR_Web.Controllers {
             TimeSpan ts = (finishTime - startTime);
             string duration = ts.ToString(@"hh\:mm\:ss");
 
-            _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Finished processing file {file}: {duration}");
+            _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Finished processing file {file} Elapsed time: {duration}");
             //_debugLogger.Debug($"Leaving HomeController.Index()");
 
             return View(model);
