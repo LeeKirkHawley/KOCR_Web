@@ -1,6 +1,6 @@
 ﻿body {
-    background-color: black;
     color: white;
+    background-color: black;
 }
 
 h1 {
@@ -12,22 +12,19 @@ h1 {
     text-align: center;
     background: darkblue;
     color: orange;
-    font-family: 'Special Elite', cursive;
+    font-family: 'Times New Roman', cursive;
 }
 
 .header-title {
-    padding-top: 10px;
-    padding-bottom: 10px;
+    font-size: 6rem;
 }
 
 .header-text {
-    padding-top: 50px;
-    padding-bottom: 30px;
-    font-size: .8rem;
+    font-size: 1rem;
     text-align: center;
 }
 
-.ocrtext {
+.ocr-text {
     color: black;
     background-color: white;
     border: 5px solid orange;

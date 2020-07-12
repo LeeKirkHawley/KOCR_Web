@@ -21,14 +21,18 @@
             </p>
             <br>
             <br>
-            <b>Select Language: </b>
-            <select asp-for="Language" asp-items="Model.Languages"></select>
-            <br>
-            <br>
-            <input type="file" name="files" />
-            <br>
-            <br>
-            <button type="submit">Upload</button>
+            <div class="row">
+                <div ckass="col-4">
+                    <b>Select Language: </b>
+                    <select asp-for="Language" asp-items="Model.Languages"></select>
+                </div>
+                <div class="col-4">
+                    <input type="file" name="files" />
+                </div>
+                <div class="col-4">
+                    <button type="submit">Upload</button>
+                </div>
+            </div>
         </div>
 
 
@@ -44,7 +48,7 @@
                 <div>
                     @Model.OriginalFileName
                 </div>
-                <div class="ocrtext" >
+                <div class="ocr-text" >
                     <pre name="ocrtext" id="ocrtext">
                         @Model.OCRText
                     </pre>
