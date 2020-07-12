@@ -16,6 +16,7 @@ using Newtonsoft;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
 using KOCR_Web.Models;
+using System.Runtime.InteropServices.ComTypes;
 
 namespace KOCR_Web.Services {
     public class OCRService {
@@ -223,7 +224,7 @@ namespace KOCR_Web.Services {
 
         }
 
-        public void Cleanup(string imageFilePath, string imageFileExtension, string textFilePath) {
+        public void ImmediateCleanup(string imageFilePath, string imageFileExtension, string textFilePath) {
             try {
                 System.IO.File.Delete(imageFilePath);
                 System.IO.File.Delete(textFilePath + ".txt");
@@ -234,6 +235,36 @@ namespace KOCR_Web.Services {
             catch (Exception ex) {
                 _debugLogger.Debug(ex, "Failed to delete OCR files.");
                 // HANDLE ERROR
+            }
+        }
+
+        public void Cleanup(string imageFilePath, string textFilePath) {
+            // cleanup old files that are 2 hours or more old
+            // this is a problem because we're doing it during the call from client
+            // so find a way to thread it
+
+            DirectoryInfo di = new DirectoryInfo(imageFilePath);
+            foreach(var file in di.GetFiles("*.*")) {
+                if (file.CreationTime.AddHours(2) < DateTime.Now) {
+                    try {
+                        file.Delete();
+                    }
+                    catch (Exception ex) {
+                        _debugLogger.Debug(ex, $"Couldn't delete file {file.FullName}");
+                    }
+                }
+            }
+
+            di = new DirectoryInfo(textFilePath);
+            foreach (var file in di.GetFiles("*.txt")) {
+                if (file.CreationTime.AddHours(2) < DateTime.Now) {
+                    try {
+                        file.Delete();
+                    }
+                    catch (Exception ex) {
+                        _debugLogger.Debug(ex, $"Couldn't delete file {file.FullName}");
+                    }
+                }
             }
         }
     }

@@ -1,5 +1,4 @@
-﻿Limit file size
-Delete GigTracker stuff from online db
-Text on allowed file types
+﻿To clipboard button
+Download file?
 More OCR options
 improve UI

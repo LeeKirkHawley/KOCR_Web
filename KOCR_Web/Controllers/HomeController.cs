@@ -13,6 +13,11 @@ using Microsoft.Extensions.Configuration;
 using NLog.Web;
 using NLog;
 using System.Threading;
+using System.Text;
+using System.Net.Http;
+using System.Net;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Hosting;
 
 namespace KOCR_Web.Controllers {
     public class HomeController : Controller {
@@ -20,10 +25,12 @@ namespace KOCR_Web.Controllers {
         private readonly OCRService _ocrService;
         private readonly Logger _debugLogger;
         private readonly Logger _jobLogger;
+        private readonly IWebHostEnvironment _environment;
 
-        public HomeController(IConfiguration settings, OCRService ocrService) {
+        public HomeController(IConfiguration settings, IWebHostEnvironment environment, OCRService ocrService) {
             _settings = settings;
             _ocrService = ocrService;
+            _environment = environment;
 
             _jobLogger = LogManager.GetLogger("jobLogger");
             _debugLogger = LogManager.GetLogger("debugLogger");
@@ -71,11 +78,6 @@ namespace KOCR_Web.Controllers {
             // Extract file name from whatever was posted by browser
             var originalFileName = System.IO.Path.GetFileName(files[0].FileName);
             string imageFileExtension = Path.GetExtension(originalFileName);
-
-            // check file sizes
-            if (imageFileExtension.ToLower() == ".pdf") {
-
-            }
 
             var fileName = Guid.NewGuid().ToString();
 
@@ -132,17 +134,17 @@ namespace KOCR_Web.Controllers {
                     ocrText = errorMsg;
             }
 
-            // cleanup artifacts
-            _ocrService.Cleanup(imageFilePath, imageFileExtension, textFilePath);
-
             // update model for display of ocr'ed data
             model.OCRText = ocrText;
             model.OriginalFileName = originalFileName;
+            model.CacheFilename = Path.GetFileName(textFileName);
             model.Languages = _ocrService.SetupLanguages();
 
             DateTime finishTime = DateTime.Now;
             TimeSpan ts = (finishTime - startTime);
             string duration = ts.ToString(@"hh\:mm\:ss");
+
+            _ocrService.Cleanup(_settings["ImageFilePath"], _settings["TextFilePath"]);
 
             _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Finished processing file {file} Elapsed time: {duration}");
             //_debugLogger.Debug($"Leaving HomeController.Index()");
@@ -154,6 +156,17 @@ namespace KOCR_Web.Controllers {
         public IActionResult AboutMe() {
             AboutMeViewModel model = new AboutMeViewModel();
             return View(model);
+        }
+
+        [HttpGet]
+            public IActionResult DownloadOCR(string cacheFileName, string originalFileName) {
+
+            string textFileName = Path.GetFileNameWithoutExtension(originalFileName) + ".txt";
+
+            var path = Path.Combine(_environment.WebRootPath, Path.Combine(Path.Combine(_settings["TextFilePath"], cacheFileName)));
+            var fs = new FileStream(path, FileMode.Open);
+
+            return File(fs, "application/octet-stream", textFileName);
         }
     }
 }

@@ -13,7 +13,12 @@
         <br>
         <br>
         <div>
-            Select a language and a file and click on the Upload button. Your file will be OCR'ed and the resulting text will appear in the browser.
+            <p>
+                Select a language and a file and click on the Upload button. Your file will be OCR'ed and the resulting text will appear in the browser.
+            </p>
+            <p>
+                Allowed file types: PDF, JPG, GIF, PNG, BMP, TIF, etc. File sizes are limited to 1 MB.
+            </p>
             <br>
             <br>
             <b>Select Language: </b>
@@ -25,22 +30,88 @@
             <br>
             <button type="submit">Upload</button>
         </div>
+
+
     </form>
 </body>
 </html>
 
 @if (Model.OCRText != null && Model.OCRText != "") {
-<br />
-<div>
-    @Model.OriginalFileName
-</div>
-<div class="ocrtext">
-    <pre>
-            @Model.OCRText
-        </pre>
-</div>
+    <div class="container">
+        <div class="row">
+            <div class="col-10">
+                <br />
+                <div>
+                    @Model.OriginalFileName
+                </div>
+                <div class="ocrtext" >
+                    <pre name="ocrtext" id="ocrtext">
+                        @Model.OCRText
+                    </pre>
+                </div>
+                }
+            </div>
+            <div class="col-2">
+                <br />
+                <br />
+                <input type="submit" name="downloadOCR" id="downloadOCR" value="Download OCR" />
+            </div>
+        </div>
+    </div>
 }
 
-<script type="text/javascript">
 
+<script type="text/javascript">
+    $(function () {
+        $('#downloadOCR').click(function () {
+            var xhr = new XMLHttpRequest();
+            var URL = "/home/DownloadOCR?cacheFileName=" + "@(Model.CacheFilename)" + "&originalFileName=" + "@(Model.OriginalFileName)"
+            xhr.open("GET", URL , true);
+            xhr.responseType = "blob";
+            xhr.onload = function (e) {
+                if (this.status == 200) {
+                    var blob = this.response;
+
+                    /* Get filename from Content-Disposition header */
+                    var filename = "";
+                    var disposition = xhr.getResponseHeader('Content-Disposition');
+                    if (disposition && disposition.indexOf('attachment') !== -1) {
+                        var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                        var matches = filenameRegex.exec(disposition);
+                        if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
+                    }
+
+                    // This does the trick
+                    var a = document.createElement('a');
+                    a.href = window.URL.createObjectURL(blob);
+                    a.download = filename;
+                    a.dispatchEvent(new MouseEvent('click'));
+
+                    ////Create a new jQuery.Event object without the "new" operator.
+                    //var e = jQuery.Event("click");
+                    //e.target = window.URL.createObjectURL(window.URL.createObjectURL(blob));
+
+                    //// trigger an artificial click event
+                    //jQuery("body").trigger(e);
+
+                }
+            }
+            xhr.send();
+
+
+            //var APIURL = "/home/DownloadOCR";
+            //var text = $('#ocrtext')[0].innerHTML;
+            //$.ajax({
+            //    type: "POST",
+            //    //url: APIURL + '/' + text,
+            //    url: APIURL,
+            //    data: {
+            //        ocrtext: text,
+            //    },
+            //    //success: function (data) {
+            //    //    alert('Success');
+            //    //}
+            //});
+        });
+    });
 </script>

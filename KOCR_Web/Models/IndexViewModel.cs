@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,6 +10,8 @@ namespace KOCR_Web.Models {
     public class IndexViewModel {
         public string OCRText { get; set; }
         public string OriginalFileName { get; set; }
+
+        public string CacheFilename { get; set; }
 
         [Required]
         [Display(Name = "Language")] 
