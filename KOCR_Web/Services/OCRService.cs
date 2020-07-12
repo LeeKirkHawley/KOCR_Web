@@ -256,7 +256,7 @@ namespace KOCR_Web.Services {
             }
 
             di = new DirectoryInfo(textFilePath);
-            foreach (var file in di.GetFiles("*.txt")) {
+            foreach (var file in di.GetFiles("*.*")) {
                 if (file.CreationTime.AddHours(2) < DateTime.Now) {
                     try {
                         file.Delete();
