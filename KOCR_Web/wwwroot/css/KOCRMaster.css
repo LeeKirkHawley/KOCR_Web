@@ -1,22 +1,17 @@
 ﻿body {
-    color: white;
-    background-color: black;
-}
-
-h1 {
-    color: orange;
+    color: black;
+    background-color: wheat;
 }
 
 .header {
     padding: 10px;
     text-align: center;
-    background: darkblue;
-    color: orange;
+    border: 5px solid orange;
     font-family: 'Times New Roman', cursive;
 }
 
 .header-title {
-    font-size: 6rem;
+    font-size: 3rem;
 }
 
 .header-text {
@@ -25,10 +20,5 @@ h1 {
 }
 
 .ocr-text {
-    color: black;
-    background-color: white;
     border: 5px solid orange;
 }
-
-
-

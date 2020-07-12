@@ -1,4 +1,3 @@
-﻿To clipboard button
-Download file?
-More OCR options
+﻿More OCR options
 improve UI
+Do something with Privacy link at bottom of page

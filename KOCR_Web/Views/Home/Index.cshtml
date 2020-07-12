@@ -22,14 +22,14 @@
             <br>
             <br>
             <div class="row">
-                <div ckass="col-4">
-                    <b>Select Language: </b>
+                <div class="col-4 text-left">
+                    @*Select Language:*@ 
                     <select asp-for="Language" asp-items="Model.Languages"></select>
                 </div>
-                <div class="col-4">
+                <div class="col-4 text-center">
                     <input type="file" name="files" />
                 </div>
-                <div class="col-4">
+                <div class="col-4 text-center">
                     <button type="submit">Upload</button>
                 </div>
             </div>
@@ -68,40 +68,35 @@
 <script type="text/javascript">
     $(function () {
         $('#downloadOCR').click(function () {
-            var xhr = new XMLHttpRequest();
-            var URL = "/home/DownloadOCR?cacheFileName=" + "@(Model.CacheFilename)" + "&originalFileName=" + "@(Model.OriginalFileName)"
-            xhr.open("GET", URL , true);
-            xhr.responseType = "blob";
-            xhr.onload = function (e) {
-                if (this.status == 200) {
-                    var blob = this.response;
-
-                    /* Get filename from Content-Disposition header */
-                    var filename = "";
-                    var disposition = xhr.getResponseHeader('Content-Disposition');
-                    if (disposition && disposition.indexOf('attachment') !== -1) {
-                        var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-                        var matches = filenameRegex.exec(disposition);
-                        if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
-                    }
-
-                    // This does the trick
-                    var a = document.createElement('a');
-                    a.href = window.URL.createObjectURL(blob);
-                    a.download = filename;
-                    a.dispatchEvent(new MouseEvent('click'));
-
-                    ////Create a new jQuery.Event object without the "new" operator.
-                    //var e = jQuery.Event("click");
-                    //e.target = window.URL.createObjectURL(window.URL.createObjectURL(blob));
-
-                    //// trigger an artificial click event
-                    //jQuery("body").trigger(e);
-
-                }
+            if (window.document.documentMode) {
+                alert("Internet Explorer is not supported for downloads. Try another browser?");
             }
-            xhr.send();
+            else {
+                var xhr = new XMLHttpRequest();
+                var URL = "/home/DownloadOCR?cacheFileName=" + "@(Model.CacheFilename)" + "&originalFileName=" + "@(Model.OriginalFileName)"
+                xhr.open("GET", URL, true);
+                xhr.responseType = "blob";
+                xhr.onload = function (e) {
+                    if (this.status == 200) {
+                        var blob = this.response;
 
+                        /* Get filename from Content-Disposition header */
+                        var filename = "";
+                        var disposition = xhr.getResponseHeader('Content-Disposition');
+                        if (disposition && disposition.indexOf('attachment') !== -1) {
+                            var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                            var matches = filenameRegex.exec(disposition);
+                            if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
+                        }
+
+                        var a = document.createElement('a');
+                        a.href = window.URL.createObjectURL(blob);
+                        a.download = filename;
+                        a.dispatchEvent(new MouseEvent('click'));
+                    }
+                }
+                xhr.send();
+            }
 
             //var APIURL = "/home/DownloadOCR";
             //var text = $('#ocrtext')[0].innerHTML;
