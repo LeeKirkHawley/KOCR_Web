@@ -160,11 +160,23 @@ namespace KOCR_Web.Controllers {
 
         [HttpGet]
             public IActionResult DownloadOCR(string cacheFileName, string originalFileName) {
+            _debugLogger.Debug($"Entering HomeController.DownloadOCR()");
 
             string textFileName = Path.GetFileNameWithoutExtension(originalFileName) + ".txt";
+            _debugLogger.Debug($"textFileName: {textFileName}");
 
-            var path = Path.Combine(_environment.WebRootPath, Path.Combine(Path.Combine(_settings["TextFilePath"], cacheFileName)));
-            var fs = new FileStream(path, FileMode.Open);
+            //var path = Path.Combine(_environment.WebRootPath, Path.Combine(Path.Combine(_settings["TextFilePath"], cacheFileName)));
+            string path = Path.Combine(_settings["TextFilePath"], cacheFileName);
+
+            FileStream fs = null;
+            try {
+                fs = new FileStream(path, FileMode.Open);
+            }
+            catch(Exception ex) {
+                _debugLogger.Debug(ex, $"Error opening {path}");
+            }
+
+            _debugLogger.Debug($"Leaving HomeController.DownloadOCR()");
 
             return File(fs, "application/octet-stream", textFileName);
         }
