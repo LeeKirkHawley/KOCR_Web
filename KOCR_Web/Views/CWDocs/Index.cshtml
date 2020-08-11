@@ -7,3 +7,29 @@
 }
 
 <h1>CWDocs</h1>
+
+
+<form method="post" enctype="multipart/form-data" asp-controller="CWDocs" asp-action="Index">
+    <br>
+    <br>
+    <div>
+        <p>
+            Select a language and a file and click on the Upload button. Your file will be OCR'ed and the resulting text will appear in the browser.
+        </p>
+        <p>
+            Allowed file types: PDF, JPG, GIF, PNG, BMP, TIF, etc. File sizes are limited to 1 MB.
+        </p>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-4 text-center">
+                <input type="file" name="files" />
+            </div>
+            <div class="col-4 text-center">
+                <button type="submit">Upload</button>
+            </div>
+        </div>
+    </div>
+
+
+</form>
