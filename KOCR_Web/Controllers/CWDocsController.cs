@@ -12,6 +12,9 @@ using Microsoft.Extensions.Configuration;
 using KOCR_Web.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Data.Sqlite;
+using System.Data;
+using LinqToDB;
 
 namespace KOCR_Web.Controllers {
     public class CWDocsController : Controller {
@@ -34,11 +37,18 @@ namespace KOCR_Web.Controllers {
         }
 
 
-        public IActionResult Index() {
+
+        public async Task<IActionResult> Index() {
             CWDocsIndexViewModel model = new CWDocsIndexViewModel();
 
-
-            _context.Database.ExecuteSqlRaw("CREATE TABLE CWDocs(Id INTEGER PRIMARY KEY)");
+            // only way I can find so far to see if table exists THAT ACTUALLY WORKS - try to add it
+            try {
+                _context.Database.ExecuteSqlRaw("CREATE TABLE Users(userName TEXT NOT NULL, pwd TEXT NOT NULL)");
+                _context.Database.ExecuteSqlRaw("CREATE TABLE Documents(userId INTEGER NOT NULL, documentId TEXT NOT NULL, FOREIGN KEY(documentId) REFERENCES Users(rowid))");
+            }
+            catch(Exception e) {
+                // if we're here, probably tables already exist
+            }
 
             return View(model);
         }
