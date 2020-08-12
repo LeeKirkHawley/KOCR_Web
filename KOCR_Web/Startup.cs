@@ -11,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using KOCR_Web.Services;
 using NLog.Web;
 using NLog;
+using Microsoft.EntityFrameworkCore;
 
 namespace KOCR_Web {
     public class Startup {
@@ -24,7 +25,13 @@ namespace KOCR_Web {
         public void ConfigureServices(IServiceCollection services) {
 
             services.AddControllersWithViews();
+            services.AddDbContext<SQLiteDBContext>();
+            //services.AddDbContext<SQLiteDBContext>((oa) => oa.UseSqlite("Data Source=CWDocs.db"));
+            //services.AddDbContext<SQLiteDBContext>(options => {
+            //    var connectionString = Configuration.GetConnectionString("SQLiteDataContext");
 
+            //    options.UseSqlite(connectionString);
+            //});
             services.AddTransient<OCRService>();
         }
 
@@ -45,6 +52,7 @@ namespace KOCR_Web {
             app.UseRouting();
 
             app.UseAuthorization();
+
 
             app.UseEndpoints(endpoints =>
             {
