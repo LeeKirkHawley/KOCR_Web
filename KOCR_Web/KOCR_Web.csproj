@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\Employee.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="linq2db.EntityFrameworkCore" Version="3.5.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.7">
