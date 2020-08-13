@@ -36,7 +36,7 @@ namespace KOCR_Web.Controllers {
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-            return RedirectToAction("CWDocs", "Home");
+            return RedirectToAction("Index", "CWDocs");
         }
 
         public async Task<IActionResult> Logout() {

@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
 using System.Data;
 using LinqToDB;
+using System.Security.Claims;
 
 namespace KOCR_Web.Controllers {
     public class CWDocsController : Controller {
@@ -50,17 +51,13 @@ namespace KOCR_Web.Controllers {
         }
 
         public async Task<IActionResult> Index() {
-            //AccountController accountController = new AccountController(_userService, _accountService);
-            CWDocsIndexViewModel model = new CWDocsIndexViewModel();
 
-            // only way I can find so far to see if table exists THAT ACTUALLY WORKS - try to add it
-            try {
-                _context.Database.ExecuteSqlRaw("CREATE TABLE Users(Id INTEGER PRIMARY KEY, userName TEXT NOT NULL, pwd TEXT NOT NULL, role TEXT NOT NULL)");
-                _context.Database.ExecuteSqlRaw("CREATE TABLE Documents(userId INTEGER NOT NULL, documentId TEXT NOT NULL, FOREIGN KEY(documentId) REFERENCES Users(rowid))");
+            var user = HttpContext.User.Identities.ToArray()[0];
+            if(user.IsAuthenticated) {
+
             }
-            catch(Exception e) {
-                // if we're here, probably tables already exist
-            }
+
+            CWDocsIndexViewModel model = new CWDocsIndexViewModel();
 
             _accountController.Login();
 
