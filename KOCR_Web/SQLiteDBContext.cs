@@ -8,7 +8,7 @@ using KOCR_Web.Models;
 
 namespace KOCR_Web {
     public class SQLiteDBContext : DbContext{
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<User> Users { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder options)
             => options.UseSqlite("Data Source=CWDocs.db");
     }

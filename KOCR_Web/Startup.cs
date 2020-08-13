@@ -12,6 +12,8 @@ using KOCR_Web.Services;
 using NLog.Web;
 using NLog;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using KOCR_Web.Controllers;
 
 namespace KOCR_Web {
     public class Startup {
@@ -24,15 +26,20 @@ namespace KOCR_Web {
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
 
-            services.AddControllersWithViews();
-            services.AddDbContext<SQLiteDBContext>();
-            //services.AddDbContext<SQLiteDBContext>((oa) => oa.UseSqlite("Data Source=CWDocs.db"));
-            //services.AddDbContext<SQLiteDBContext>(options => {
-            //    var connectionString = Configuration.GetConnectionString("SQLiteDataContext");
+            // Enable cookie authentication
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                    .AddCookie();
+            services.AddHttpContextAccessor();
 
-            //    options.UseSqlite(connectionString);
-            //});
+            services.AddControllersWithViews();
+
+            services.AddDbContext<SQLiteDBContext>();
+
+            services.AddTransient<AccountService>();
+            services.AddTransient<AccountController>();
             services.AddTransient<OCRService>();
+            services.AddTransient<UserService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,6 +58,8 @@ namespace KOCR_Web {
 
             app.UseRouting();
 
+            // Add authentication to request pipeline
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

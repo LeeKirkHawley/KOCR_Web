@@ -24,31 +24,45 @@ namespace KOCR_Web.Controllers {
         private readonly OCRService _ocrService;
         private readonly IWebHostEnvironment _environment;
         private readonly SQLiteDBContext _context;
+        private readonly UserService _userService;
+        private readonly AccountService _accountService;
+        private readonly AccountController _accountController;
 
 
-        public CWDocsController(IConfiguration settings, OCRService ocrService, IWebHostEnvironment environment, SQLiteDBContext context) {
+        public CWDocsController(IConfiguration settings, 
+                                OCRService ocrService, 
+                                IWebHostEnvironment environment, 
+                                SQLiteDBContext context,
+                                UserService userService, 
+                                AccountService accountService,
+                                AccountController accountController) {
+
             _debugLogger = LogManager.GetLogger("debugLogger");
             _settings = settings;
             _ocrService = ocrService;
             _environment = environment;
             _context = context;
+            _userService = userService;
+            _accountService = accountService;
+            _accountController = accountController;
 
             _ocrService.SetupLanguages();
         }
 
-
-
         public async Task<IActionResult> Index() {
+            //AccountController accountController = new AccountController(_userService, _accountService);
             CWDocsIndexViewModel model = new CWDocsIndexViewModel();
 
             // only way I can find so far to see if table exists THAT ACTUALLY WORKS - try to add it
             try {
-                _context.Database.ExecuteSqlRaw("CREATE TABLE Users(userName TEXT NOT NULL, pwd TEXT NOT NULL)");
+                _context.Database.ExecuteSqlRaw("CREATE TABLE Users(Id INTEGER PRIMARY KEY, userName TEXT NOT NULL, pwd TEXT NOT NULL, role TEXT NOT NULL)");
                 _context.Database.ExecuteSqlRaw("CREATE TABLE Documents(userId INTEGER NOT NULL, documentId TEXT NOT NULL, FOREIGN KEY(documentId) REFERENCES Users(rowid))");
             }
             catch(Exception e) {
                 // if we're here, probably tables already exist
             }
+
+            _accountController.Login();
 
             return View(model);
         }

@@ -1,0 +1,37 @@
+﻿@using KOCR_Web.Models
+@*@model CWDocsIndexViewModel*@
+@{
+    ViewData["Title"] = "CWDocs Login Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "_Layout";
+}
+
+<h1>Login</h1>
+<form method="post" asp-controller="Account" asp-action="Login">
+    <br>
+    <br>
+    <div>
+        <div class="row">
+            <div class="col-4">
+                <a asp-controller="Account" asp-action="CreateUser">New User</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <input name="userName" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <input name="password" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4">
+                <button type="submit">Login</button>
+            </div>
+        </div>
+    </div>
+
+
+</form>
