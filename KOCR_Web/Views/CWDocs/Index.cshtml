@@ -2,25 +2,10 @@
 @model CWDocsIndexViewModel
 @{
     ViewData["Title"] = "CWDocs Home Page";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
     Layout = "_CWDocsLayout";
 }
 
 <a asp-controller="Account" asp-action="Login">Login</a>
 <br>
+<a asp-controller="CWDocs" asp-action="UploadDoc">Upload Document</a>
 
-<form method="post" enctype="multipart/form-data" asp-controller="CWDocs" asp-action="Index">
-    <br>
-    <div>
-        <div class="row">
-            <div class="col-4 text-center">
-                <input type="file" name="files" />
-            </div>
-            <div class="col-4 text-center">
-                <button type="submit">Upload</button>
-            </div>
-        </div>
-    </div>
-
-
-</form>

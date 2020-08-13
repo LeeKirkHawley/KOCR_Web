@@ -53,8 +53,8 @@ namespace KOCR_Web.Controllers {
         public async Task<IActionResult> Index() {
 
             var user = HttpContext.User.Identities.ToArray()[0];
-            if(user.IsAuthenticated) {
-
+            if(!user.IsAuthenticated) {
+                //throw new Exception("user is not logged in.");
             }
 
             CWDocsIndexViewModel model = new CWDocsIndexViewModel();
@@ -64,9 +64,31 @@ namespace KOCR_Web.Controllers {
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> UploadDoc() {
+
+            var user = HttpContext.User.Identities.ToArray()[0];
+            if (user.IsAuthenticated) {
+
+            }
+
+            CWDocsUploadDocsViewModel model = new CWDocsUploadDocsViewModel();
+
+            return View(model);
+        }
+
         [HttpPost]
-        [RequestSizeLimit(1000000)]
-        public async Task<ActionResult> Index(CWDocsIndexViewModel model, IFormFile[] files) {
+        //[RequestSizeLimit(1000000)]
+        public async Task<ActionResult> UploadDoc(CWDocsUploadDocsViewModel model, IFormFile[] files) {
+
+            ClaimsIdentity identity = HttpContext.User.Identities.ToArray()[0];
+            if (!identity.IsAuthenticated) {
+                throw new Exception("user is not logged in.");
+            }
+
+            User user = _context.Users.Where(u => u.userName == HttpContext.User.Identities.ToArray()[0].Name).FirstOrDefault();
+            
+
 
             //_debugLogger.Debug($"Entering HomeController.Index()");
             DateTime startTime = DateTime.Now;
@@ -98,7 +120,7 @@ namespace KOCR_Web.Controllers {
             // set up the text file (output) path
             //string textFilePath = Path.Combine(_settings["TextFilePath"], fileName);
 
-            // If file with same name exists delete it
+            // If file with same name exists
             if (System.IO.File.Exists(documentFilePath)) {
                 throw new Exception($"Document {documentFilePath} already exists!");
             }
@@ -145,13 +167,27 @@ namespace KOCR_Web.Controllers {
             //model.OCRText = ocrText;
             //model.CacheFilename = Path.GetFileName(textFileName);
             model.OriginalFileName = originalFileName;
-            model.Languages = _ocrService.SetupLanguages();
 
             DateTime finishTime = DateTime.Now;
             TimeSpan ts = (finishTime - startTime);
             string duration = ts.ToString(@"hh\:mm\:ss");
 
             _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Finished uploading document {file} Elapsed time: {duration}");
+
+            Document newDoc = _context.Documents.Add(new Document {
+                userId = user.Id,
+                documentName  = Path.GetFileName(documentFilePath),
+                originalDocumentName = originalFileName
+            }).Entity;
+
+            try {
+                _context.SaveChanges();
+            }
+            catch(Exception e) {
+
+            }
+
+
             //_debugLogger.Debug($"Leaving HomeController.Index()");
 
             return View(model);

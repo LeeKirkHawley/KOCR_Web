@@ -1,0 +1,21 @@
+﻿@using KOCR_Web.Models
+@model CWDocsUploadDocsViewModel
+@{
+    ViewData["Title"] = "CWDocs Upload Page";
+    Layout = "_CWDocsLayout";
+}
+
+<form method="post" enctype="multipart/form-data" asp-controller="CWDocs" asp-action="UploadDoc">
+    <br>
+    <div>
+        <div class="row">
+            <div class="col-4 text-center">
+                <input type="file" name="files" />
+            </div>
+            <div class="col-4 text-center">
+                <button type="submit">Upload</button>
+            </div>
+        </div>
+    </div>
+</form>
+
