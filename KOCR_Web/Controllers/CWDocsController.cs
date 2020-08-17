@@ -88,9 +88,6 @@ namespace KOCR_Web.Controllers {
 
             User user = _context.Users.Where(u => u.userName == HttpContext.User.Identities.ToArray()[0].Name).FirstOrDefault();
             
-
-
-            //_debugLogger.Debug($"Entering HomeController.Index()");
             DateTime startTime = DateTime.Now;
 
             string file = "";
@@ -184,15 +181,17 @@ namespace KOCR_Web.Controllers {
                 _context.SaveChanges();
             }
             catch(Exception e) {
-
+                throw;
             }
-
-
-            //_debugLogger.Debug($"Leaving HomeController.Index()");
 
             return View(model);
         }
 
+        [HttpGet] 
+        public IActionResult LoadDocs() {
 
+            List<Document> docList = _context.Documents.ToList();
+            return Json(docList);
+        }
     }
 }

@@ -9,3 +9,32 @@
 <br>
 <a asp-controller="CWDocs" asp-action="UploadDoc">Upload Document</a>
 
+<table id="docTable" class="display">
+    <thead>
+        <tr>
+            <th>User</th>
+            <th>File</th>
+            <th>File Id</th>
+        </tr>
+    </thead>
+KC</table>
+
+<script>
+    $(document).ready(function () {
+        $('#docTable').DataTable({
+            'ajax': {
+                "type": "GET",
+                "url": '/CWDocs/LoadDocs/',
+                "datatype": "json",
+                "data": function (d) {
+                },
+                "dataSrc": ""
+            }, 
+            'columns': [   // this is determining the order of fields in the table
+                { "data": "userId" },
+                { "data": "originalDocumentName" },
+                { "data": "documentName" }
+            ]
+        });
+    });
+</script>
