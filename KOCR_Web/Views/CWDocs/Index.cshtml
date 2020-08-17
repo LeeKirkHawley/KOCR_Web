@@ -26,13 +26,15 @@
 <script>
     $(document).ready(function () {
         $('#docTable').DataTable({
+            "processing": true, // for show progress bar    
+            "serverSide": true, // for process server side    
+            "filter": true, // this is for disable filter (search box)    
             'ajax': {
-                "type": "GET",
+                "type": "POST",
                 "url": '/CWDocs/LoadDocs/',
                 "datatype": "json",
                 "data": function (d) {
-                },
-                "dataSrc": ""
+                }
             },
             'columns': [   // this is determining the order of fields in the table
                 { "data": "fileId" },
