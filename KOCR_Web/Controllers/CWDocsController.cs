@@ -192,6 +192,7 @@ namespace KOCR_Web.Controllers {
 
         [HttpPost] 
         public IActionResult LoadDocs() {
+            User user = _context.Users.Where(u => u.userName == HttpContext.User.Identities.ToArray()[0].Name).FirstOrDefault();
 
             var draw = HttpContext.Request.Form["draw"].FirstOrDefault();
 
@@ -215,7 +216,15 @@ namespace KOCR_Web.Controllers {
             int skip = start != null ? Convert.ToInt32(start) : 0;
             int recordsTotal = 0;
 
-            List<Document> docList = _context.Documents.ToList();
+            // if user is not logged in, don't show nothin
+            if (user == null) {
+                List<Document> emptyList = new List<Document>();
+                var errorJson = Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = emptyList });
+                return errorJson;
+            }
+
+            // get documents from db
+            List<Document> docList = _context.Documents.Where(d => d.userId == user.Id).ToList();
 
             //Sorting  
             if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection))) {
@@ -237,6 +246,5 @@ namespace KOCR_Web.Controllers {
             var json = Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
             return json;
         }
-
     }
 }
