@@ -16,6 +16,9 @@ using Microsoft.Data.Sqlite;
 using System.Data;
 using LinqToDB;
 using System.Security.Claims;
+using System.Linq.Expressions;
+using KOCR_Web.Extensions;
+using DataTables.AspNet.Core;
 
 namespace KOCR_Web.Controllers {
     public class CWDocsController : Controller {
@@ -213,12 +216,12 @@ namespace KOCR_Web.Controllers {
             int recordsTotal = 0;
 
             List<Document> docList = _context.Documents.ToList();
-//            return Json(docList);
 
             //Sorting  
-            //if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection))) {
-            //    customerData = customerData.OrderBy(sortColumn + " " + sortColumnDirection);
-            //}
+            if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection))) {
+                docList = OrderByExtension.OrderBy<Document>(docList.AsQueryable<Document>(), sortColumn).ToList();
+
+            }
             ////Search  
             //if (!string.IsNullOrEmpty(searchValue)) {
             //    customerData = customerData.Where(m => m.Name == searchValue);
@@ -226,11 +229,14 @@ namespace KOCR_Web.Controllers {
 
             //total number of rows count   
             recordsTotal = docList.Count();
+
             //Paging   
             var data = docList.Skip(skip).Take(pageSize).ToList();
+
             //Returning Json Data  
             var json = Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
             return json;
         }
+
     }
 }

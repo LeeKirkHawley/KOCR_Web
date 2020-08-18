@@ -36,11 +36,12 @@
                 "data": function (d) {
                 }
             },
-            'columns': [   // this is determining the order of fields in the table
-                { "data": "fileId" },
-                { "data": "userId" },
-                { "data": "originalDocumentName" },
-                { "data": "documentName" }
+            //columnDefs: [{ "orderable": false, "searchable": false, "targets": 1 }],
+            columns: [   // this is determining the order of fields in the table
+                { data: "fileId", name: "fileId"},
+                { data: "userId", name: "userId" },
+                { data: "originalDocumentName", name: "originalDocumentName" },
+                { data: "documentName", name: "documentName" }
             ]
         });
     });
