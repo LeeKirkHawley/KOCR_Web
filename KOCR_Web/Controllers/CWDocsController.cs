@@ -223,9 +223,9 @@ namespace KOCR_Web.Controllers {
 
             }
             ////Search  
-            //if (!string.IsNullOrEmpty(searchValue)) {
-            //    customerData = customerData.Where(m => m.Name == searchValue);
-            //}
+            if (!string.IsNullOrEmpty(searchValue)) {
+                docList = docList.Where(m => m.originalDocumentName.Contains(searchValue)).ToList();
+            }
 
             //total number of rows count   
             recordsTotal = docList.Count();
