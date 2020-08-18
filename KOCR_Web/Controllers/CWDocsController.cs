@@ -219,7 +219,7 @@ namespace KOCR_Web.Controllers {
             // if user is not logged in, don't show nothin
             if (user == null) {
                 List<Document> emptyList = new List<Document>();
-                var errorJson = Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = emptyList });
+                var errorJson = Json(new { draw = draw, recordsFiltered = 0, recordsTotal = 0, data = emptyList });
                 return errorJson;
             }
 
@@ -231,7 +231,8 @@ namespace KOCR_Web.Controllers {
                 docList = OrderByExtension.OrderBy<Document>(docList.AsQueryable<Document>(), sortColumn).ToList();
 
             }
-            ////Search  
+
+            //Search  
             if (!string.IsNullOrEmpty(searchValue)) {
                 docList = docList.Where(m => m.originalDocumentName.Contains(searchValue)).ToList();
             }

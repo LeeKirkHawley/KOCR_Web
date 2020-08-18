@@ -1,3 +1,4 @@
 ﻿More OCR options
 improve UI
 Do something with Privacy link at bottom of page
+Docs - email new user for verification
