@@ -57,7 +57,7 @@ namespace KOCR_Web.Controllers {
 
             var user = HttpContext.User.Identities.ToArray()[0];
             if(!user.IsAuthenticated) {
-                //throw new Exception("user is not logged in.");
+                return RedirectToAction("login", "account");
             }
 
             CWDocsIndexViewModel model = new CWDocsIndexViewModel();
@@ -71,8 +71,8 @@ namespace KOCR_Web.Controllers {
         public async Task<IActionResult> UploadDoc() {
 
             var user = HttpContext.User.Identities.ToArray()[0];
-            if (user.IsAuthenticated) {
-
+            if (!user.IsAuthenticated) {
+                return RedirectToAction("login", "account");
             }
 
             CWDocsUploadDocsViewModel model = new CWDocsUploadDocsViewModel();
@@ -229,7 +229,6 @@ namespace KOCR_Web.Controllers {
             //Sorting  
             if (!(string.IsNullOrEmpty(sortColumn) && string.IsNullOrEmpty(sortColumnDirection))) {
                 docList = OrderByExtension.OrderBy<Document>(docList.AsQueryable<Document>(), sortColumn).ToList();
-
             }
 
             //Search  
