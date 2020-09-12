@@ -18,6 +18,7 @@ using System.Net.Http;
 using System.Net;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace KOCR_Web.Controllers {
     public class HomeController : Controller {
@@ -42,7 +43,26 @@ namespace KOCR_Web.Controllers {
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error() {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            string ExceptionMessage = "";
+
+            var exceptionHandlerPathFeature =
+                HttpContext.Features.Get<IExceptionHandlerPathFeature>();
+            if (exceptionHandlerPathFeature?.Error is FileNotFoundException) {
+                ExceptionMessage = "File error thrown";
+            }
+            if(exceptionHandlerPathFeature?.Error.Message == "Request body too large.") {
+                ExceptionMessage = "File was too big - files are limited to 1000000 bytes.";
+            }
+            if (exceptionHandlerPathFeature?.Path == "/index") {
+                ExceptionMessage += " from home page";
+            }
+
+            ErrorViewModel errorModel = new ErrorViewModel {
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
+                ExceptionMessage = ExceptionMessage
+            };
+
+            return View(errorModel);
         }
 
         [HttpGet]
@@ -60,6 +80,9 @@ namespace KOCR_Web.Controllers {
         [RequestSizeLimit(1000000)]
         public async Task<ActionResult> Index(IndexViewModel model, IFormFile[] files) {
 
+            //if(files[0].Length > 1000000) {
+            //    ModelState.AddModelError("File was too large.", new FileFormatException()); ;
+            //}
             //_debugLogger.Debug($"Entering HomeController.Index()");
             DateTime startTime = DateTime.Now;
 

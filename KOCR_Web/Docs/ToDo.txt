@@ -1,4 +1,5 @@
-﻿More OCR options
+﻿Fix problem with OCR big files
+More OCR options
 improve UI
 Do something with Privacy link at bottom of page
 Docs - email new user for verification

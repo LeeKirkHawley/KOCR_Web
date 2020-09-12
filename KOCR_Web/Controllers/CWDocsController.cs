@@ -33,11 +33,11 @@ namespace KOCR_Web.Controllers {
         private readonly AccountController _accountController;
 
 
-        public CWDocsController(IConfiguration settings, 
-                                OCRService ocrService, 
-                                IWebHostEnvironment environment, 
+        public CWDocsController(IConfiguration settings,
+                                OCRService ocrService,
+                                IWebHostEnvironment environment,
                                 SQLiteDBContext context,
-                                UserService userService, 
+                                UserService userService,
                                 AccountService accountService,
                                 AccountController accountController) {
 
@@ -56,7 +56,7 @@ namespace KOCR_Web.Controllers {
         public async Task<IActionResult> Index() {
 
             var user = HttpContext.User.Identities.ToArray()[0];
-            if(!user.IsAuthenticated) {
+            if (!user.IsAuthenticated) {
                 return RedirectToAction("login", "account");
             }
 
@@ -82,7 +82,7 @@ namespace KOCR_Web.Controllers {
 
         [HttpPost]
         //[RequestSizeLimit(1000000)]
-        public async Task<ActionResult> UploadDoc(CWDocsUploadDocsViewModel model, IFormFile[] files) {
+        public ActionResult UploadDoc(CWDocsUploadDocsViewModel model, IFormFile[] files) {
 
             ClaimsIdentity identity = HttpContext.User.Identities.ToArray()[0];
             if (!identity.IsAuthenticated) {
@@ -90,7 +90,7 @@ namespace KOCR_Web.Controllers {
             }
 
             User user = _context.Users.Where(u => u.userName == HttpContext.User.Identities.ToArray()[0].Name).FirstOrDefault();
-            
+
             DateTime startTime = DateTime.Now;
 
             string file = "";
@@ -176,21 +176,21 @@ namespace KOCR_Web.Controllers {
 
             Document newDoc = _context.Documents.Add(new Document {
                 userId = user.Id,
-                documentName  = Path.GetFileName(documentFilePath),
+                documentName = Path.GetFileName(documentFilePath),
                 originalDocumentName = originalFileName
             }).Entity;
 
             try {
                 _context.SaveChanges();
             }
-            catch(Exception e) {
+            catch (Exception e) {
                 throw;
             }
 
             return View(model);
         }
 
-        [HttpPost] 
+        [HttpPost]
         public IActionResult LoadDocs() {
             User user = _context.Users.Where(u => u.userName == HttpContext.User.Identities.ToArray()[0].Name).FirstOrDefault();
 
@@ -245,6 +245,20 @@ namespace KOCR_Web.Controllers {
             //Returning Json Data  
             var json = Json(new { draw = draw, recordsFiltered = recordsTotal, recordsTotal = recordsTotal, data = data });
             return json;
+        }
+
+        [HttpGet]
+        public IActionResult View(int Id) {
+            //return Content($"View Page {Id}");
+
+            Document document = _context.Documents.Where(d => d.fileId == Id).FirstOrDefault();
+            string documentFilePath = $"\\uploads\\{document.documentName}";
+
+            CWDocsViewModel model = new CWDocsViewModel {
+                Image = documentFilePath
+            };
+
+            return View(model);
         }
     }
 }

@@ -14,6 +14,8 @@ using NLog;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using KOCR_Web.Controllers;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace KOCR_Web {
     public class Startup {
@@ -55,6 +57,11 @@ namespace KOCR_Web {
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            //app.UseStaticFiles(new StaticFileOptions {
+            //    FileProvider = new PhysicalFileProvider(
+            //            Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
+            //    RequestPath = "/uploads"
+            //});
 
             app.UseRouting();
 
