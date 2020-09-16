@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.IO;
+using System.IO.Packaging;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using KOCR_Web.Models;
 using Microsoft.AspNetCore.Http;
 using KOCR_Web.Services;
-using System.IO;
 using Microsoft.Extensions.Configuration;
 using NLog.Web;
 using NLog;
@@ -80,10 +81,10 @@ namespace KOCR_Web.Controllers {
         [RequestSizeLimit(1000000)]
         public async Task<ActionResult> Index(IndexViewModel model, IFormFile[] files) {
 
-            //if(files[0].Length > 1000000) {
-            //    ModelState.AddModelError("File was too large.", new FileFormatException()); ;
+            //if (files[0].Length > 1000000) {
+            //    ModelState.AddModelError("File was too large.", new FileFormatException()); 
             //}
-            //_debugLogger.Debug($"Entering HomeController.Index()");
+            _debugLogger.Debug($"Entering HomeController.Index()");
             DateTime startTime = DateTime.Now;
 
             string file = "";
