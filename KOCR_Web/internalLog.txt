@@ -3544,3 +3544,13 @@
 2020-09-16 16:22:06.8762 Info Adding target FileTarget(Name=debugLogger)
 2020-09-16 16:22:06.8773 Info Adding target FileTarget(Name=jobLogger)
 2020-09-16 16:22:06.9105 Info Validating config: TargetNames=debugLogger, jobLogger, ConfigItems=25, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-09-18 12:36:16.5459 Info Message Template Auto Format enabled
+2020-09-18 12:36:16.5816 Info Loading assembly: NLog.Web.AspNetCore
+2020-09-18 12:36:16.6529 Info Adding target FileTarget(Name=debugLogger)
+2020-09-18 12:36:16.6529 Info Adding target FileTarget(Name=jobLogger)
+2020-09-18 12:36:16.7152 Info Validating config: TargetNames=debugLogger, jobLogger, ConfigItems=25, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
+2020-09-18 12:38:51.8135 Info Message Template Auto Format enabled
+2020-09-18 12:38:51.8265 Info Loading assembly: NLog.Web.AspNetCore
+2020-09-18 12:38:51.8786 Info Adding target FileTarget(Name=debugLogger)
+2020-09-18 12:38:51.8786 Info Adding target FileTarget(Name=jobLogger)
+2020-09-18 12:38:51.9185 Info Validating config: TargetNames=debugLogger, jobLogger, ConfigItems=25, FilePath=C:\Work\KOCR_Web\KOCR_Web\bin\Debug\netcoreapp3.1\nlog.config
