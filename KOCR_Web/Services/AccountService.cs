@@ -27,6 +27,10 @@ namespace KOCR_Web.Services {
                 return null;
             }
 
+            if(user.pwd != password) {
+                return null;
+            }
+
             var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
             identity.AddClaim(new Claim(ClaimTypes.Name, user.userName));
 

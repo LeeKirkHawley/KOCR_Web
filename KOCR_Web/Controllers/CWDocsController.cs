@@ -81,7 +81,6 @@ namespace KOCR_Web.Controllers {
         }
 
         [HttpPost]
-        //[RequestSizeLimit(1000000)]
         public ActionResult UploadDoc(CWDocsUploadDocsViewModel model, IFormFile[] files) {
 
             ClaimsIdentity identity = HttpContext.User.Identities.ToArray()[0];
@@ -130,6 +129,15 @@ namespace KOCR_Web.Controllers {
                 using (var localFile = System.IO.File.OpenWrite(documentFilePath))
                 using (var uploadedFile = files[0].OpenReadStream()) {
                     uploadedFile.CopyTo(localFile);
+
+                    // update model for display of ocr'ed data
+                    model.OriginalFileName = originalFileName;
+
+                    DateTime finishTime = DateTime.Now;
+                    TimeSpan ts = (finishTime - startTime);
+                    string duration = ts.ToString(@"hh\:mm\:ss");
+
+                    _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Finished uploading document {file} to {localFile} Elapsed time: {duration}");
                 }
             }
             catch (Exception ex) {
@@ -163,16 +171,6 @@ namespace KOCR_Web.Controllers {
             //        ocrText = errorMsg;
             //}
 
-            // update model for display of ocr'ed data
-            //model.OCRText = ocrText;
-            //model.CacheFilename = Path.GetFileName(textFileName);
-            model.OriginalFileName = originalFileName;
-
-            DateTime finishTime = DateTime.Now;
-            TimeSpan ts = (finishTime - startTime);
-            string duration = ts.ToString(@"hh\:mm\:ss");
-
-            _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Finished uploading document {file} Elapsed time: {duration}");
 
             Document newDoc = _context.Documents.Add(new Document {
                 userId = user.Id,
