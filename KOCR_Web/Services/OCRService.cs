@@ -19,7 +19,7 @@ using KOCR_Web.Models;
 using System.Runtime.InteropServices.ComTypes;
 
 namespace KOCR_Web.Services {
-    public class OCRService {
+    public class OCRService : IOCRService {
 
         private readonly IConfiguration _settings;
         private readonly Logger _debugLogger;

@@ -14,9 +14,9 @@ namespace KOCR_Web.Controllers {
     public class FileUploadController : Controller {
 
         private readonly IConfiguration _settings;
-        private readonly OCRService _ocrService;
+        private readonly IOCRService _ocrService;
 
-        public FileUploadController(IConfiguration settings, OCRService ocrService) {
+        public FileUploadController(IConfiguration settings, IOCRService ocrService) {
             _settings = settings;
             _ocrService = ocrService;
         }

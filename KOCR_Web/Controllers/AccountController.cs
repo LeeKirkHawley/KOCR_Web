@@ -11,10 +11,10 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace KOCR_Web.Controllers {
     public class AccountController : Controller {
-        private readonly UserService _userService;
-        private readonly AccountService _accountService;
+        private readonly IUserService _userService;
+        private readonly IAccountService _accountService;
 
-        public AccountController(UserService userService, AccountService accountService) {
+        public AccountController(IUserService userService, IAccountService accountService) {
             _userService = userService;
             _accountService = accountService;
         }

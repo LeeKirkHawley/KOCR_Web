@@ -24,12 +24,12 @@ using Microsoft.AspNetCore.Diagnostics;
 namespace KOCR_Web.Controllers {
     public class HomeController : Controller {
         private readonly IConfiguration _settings;
-        private readonly OCRService _ocrService;
+        private readonly IOCRService _ocrService;
         private readonly Logger _debugLogger;
         private readonly Logger _jobLogger;
         private readonly IWebHostEnvironment _environment;
 
-        public HomeController(IConfiguration settings, IWebHostEnvironment environment, OCRService ocrService) {
+        public HomeController(IConfiguration settings, IWebHostEnvironment environment, IOCRService ocrService) {
             _settings = settings;
             _ocrService = ocrService;
             _environment = environment;

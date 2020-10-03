@@ -37,11 +37,11 @@ namespace KOCR_Web {
 
             services.AddDbContext<SQLiteDBContext>();
 
-            services.AddTransient<AccountService>();
-            services.AddTransient<AccountController>();
-            services.AddTransient<OCRService>();
-            services.AddTransient<UserService>();
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IOCRService, OCRService>();
 
+            services.AddTransient<AccountController>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

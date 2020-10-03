@@ -42,6 +42,7 @@
 
   <ItemGroup>
     <Folder Include="Infrastructure\" />
+    <Folder Include="Shell\" />
     <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 

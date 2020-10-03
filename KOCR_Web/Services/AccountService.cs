@@ -10,12 +10,12 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace KOCR_Web.Services {
-    public class AccountService {
+    public class AccountService : IAccountService{
 
         private readonly SQLiteDBContext _context;
-        private readonly UserService _userService;
+        private readonly IUserService _userService;
 
-        public AccountService(SQLiteDBContext context, UserService userService) {
+        public AccountService(SQLiteDBContext context, IUserService userService) {
             _context = context;
             _userService = userService;
         }

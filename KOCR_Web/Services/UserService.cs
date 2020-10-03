@@ -6,7 +6,7 @@ using KOCR_Web.Models;
 
 namespace KOCR_Web.Services {
 
-    public class UserService {
+    public class UserService : IUserService{
         private readonly SQLiteDBContext _context;
 
         public UserService(SQLiteDBContext context) {

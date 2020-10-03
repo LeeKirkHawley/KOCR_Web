@@ -25,20 +25,20 @@ namespace KOCR_Web.Controllers {
 
         private readonly Logger _debugLogger;
         private readonly IConfiguration _settings;
-        private readonly OCRService _ocrService;
+        private readonly IOCRService _ocrService;
         private readonly IWebHostEnvironment _environment;
         private readonly SQLiteDBContext _context;
-        private readonly UserService _userService;
-        private readonly AccountService _accountService;
+        private readonly IUserService _userService;
+        private readonly IAccountService _accountService;
         private readonly AccountController _accountController;
 
 
         public CWDocsController(IConfiguration settings,
-                                OCRService ocrService,
+                                IOCRService ocrService,
                                 IWebHostEnvironment environment,
                                 SQLiteDBContext context,
-                                UserService userService,
-                                AccountService accountService,
+                                IUserService userService,
+                                IAccountService accountService,
                                 AccountController accountController) {
 
             _debugLogger = LogManager.GetLogger("debugLogger");
