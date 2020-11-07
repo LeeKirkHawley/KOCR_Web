@@ -93,6 +93,7 @@ namespace KOCR_Web.Controllers {
             }
             catch (Exception ex) {
                 _debugLogger.Debug(ex, "Exception reading file name.");
+                throw;
             }
 
             _jobLogger.Info($"OCR file {file}");
