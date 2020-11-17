@@ -40,7 +40,6 @@ namespace KOCR_Web {
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IOCRService, OCRService>();
-
             services.AddTransient<AccountController>();
         }
 

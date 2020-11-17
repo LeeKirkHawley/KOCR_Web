@@ -1,6 +1,6 @@
 using System;
 
-namespace api.K_OCR.com {
+namespace api.K_OCR {
     public class WeatherForecast {
         public DateTime Date { get; set; }
 

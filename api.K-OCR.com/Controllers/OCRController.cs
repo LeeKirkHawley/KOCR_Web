@@ -1,88 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
-using System.IO;
-using System.IO.Packaging;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using KOCR_Web.Models;
+using api.K_OCR.Models;
 using Microsoft.AspNetCore.Http;
-using KOCR_Web.Services;
-using Microsoft.Extensions.Configuration;
-using NLog.Web;
+using Microsoft.Extensions.Logging;
 using NLog;
+using api.KOCR.Services;
 using System.Threading;
-using System.Text;
-using System.Net.Http;
-using System.Net;
-using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Diagnostics;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 
-namespace KOCR_Web.Controllers {
-    public class HomeController : Controller {
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+
+namespace api.K_OCR.Controllers {
+    [Route("api/[controller]")]
+    [ApiController]
+    public class OCRController : ControllerBase {
         private readonly IConfiguration _settings;
         private readonly IOCRService _ocrService;
         private readonly Logger _debugLogger;
         private readonly Logger _jobLogger;
-        private readonly IWebHostEnvironment _environment;
 
-        public HomeController(IConfiguration settings, IWebHostEnvironment environment, IOCRService ocrService) {
+        public OCRController(IConfiguration settings, IOCRService ocrService) {
             _settings = settings;
             _ocrService = ocrService;
-            _environment = environment;
-
-            _jobLogger = LogManager.GetLogger("jobLogger");
-            _debugLogger = LogManager.GetLogger("debugLogger");
         }
 
-        public IActionResult Privacy() {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error() {
-            string ExceptionMessage = "";
-
-            var exceptionHandlerPathFeature =
-                HttpContext.Features.Get<IExceptionHandlerPathFeature>();
-            if (exceptionHandlerPathFeature?.Error is FileNotFoundException) {
-                ExceptionMessage = "File error thrown";
-            }
-            if(exceptionHandlerPathFeature?.Error.Message == "Request body too large.") {
-                ExceptionMessage = "File was too big - files are limited to 1000000 bytes.";
-            }
-            if (exceptionHandlerPathFeature?.Path == "/index") {
-                ExceptionMessage += " from home page";
-            }
-
-            ErrorViewModel errorModel = new ErrorViewModel {
-                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier,
-                ExceptionMessage = ExceptionMessage
-            };
-
-            return View(errorModel);
-        }
-
+        // GET: api/<OCRController>
         [HttpGet]
-        public IActionResult Index(IndexViewModel model) {
-            if (model.OCRText == null) {
-                model.OCRText = "";
-            }
-            model.Languages = _ocrService.SetupLanguages();
-            model.Language = "eng";
-
-            return View(model);
+        public IEnumerable<string> Get() {
+            return new string[] { "value1", "value2" };
         }
 
+        // GET api/<OCRController>/5
+        [HttpGet("{id}")]
+        public string Get(int id) {
+            return "value";
+        }
+
+        // POST api/<OCRController>
         [HttpPost]
+        [Consumes("multipart/form-data")]
         [RequestSizeLimit(1000000)]
-        public async Task<ActionResult> Index(IndexViewModel model, IFormFile[] files) {
-
-
-
+        public async Task<OCRModel> Post([FromBody] OCRModel model, IFormFile[] files) {
             //if (files[0].Length > 1000000) {
             //    ModelState.AddModelError("File was too large.", new FileFormatException()); 
             //}
@@ -161,6 +123,8 @@ namespace KOCR_Web.Controllers {
                     ocrText = errorMsg;
             }
 
+            //OCRModel model = new OCRModel();
+
             // update model for display of ocr'ed data
             model.OCRText = ocrText;
             model.OriginalFileName = originalFileName;
@@ -176,36 +140,18 @@ namespace KOCR_Web.Controllers {
             _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Finished processing file {file} Elapsed time: {duration}");
             //_debugLogger.Debug($"Leaving HomeController.Index()");
 
-            return View(model);
+            return model;
+
         }
 
-        [HttpGet]
-        public IActionResult AboutMe() {
-            AboutMeViewModel model = new AboutMeViewModel();
-            return View(model);
+        // PUT api/<OCRController>/5
+        [HttpPut("{id}")]
+        public void Put(int id, [FromBody] string value) {
         }
 
-        [HttpGet]
-            public IActionResult DownloadOCR(string cacheFileName, string originalFileName) {
-            _debugLogger.Debug($"Entering HomeController.DownloadOCR()");
-
-            string textFileName = Path.GetFileNameWithoutExtension(originalFileName) + ".txt";
-            _debugLogger.Debug($"textFileName: {textFileName}");
-
-            //var path = Path.Combine(_environment.WebRootPath, Path.Combine(Path.Combine(_settings["TextFilePath"], cacheFileName)));
-            string path = Path.Combine(_settings["TextFilePath"], cacheFileName);
-
-            FileStream fs = null;
-            try {
-                fs = new FileStream(path, FileMode.Open);
-            }
-            catch(Exception ex) {
-                _debugLogger.Debug(ex, $"Error opening {path}");
-            }
-
-            _debugLogger.Debug($"Leaving HomeController.DownloadOCR()");
-
-            return File(fs, "application/octet-stream", textFileName);
+        // DELETE api/<OCRController>/5
+        [HttpDelete("{id}")]
+        public void Delete(int id) {
         }
     }
 }

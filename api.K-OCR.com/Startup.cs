@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using api.KOCR.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,7 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace api.K_OCR.com {
+namespace api.K_OCR {
     public class Startup {
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
@@ -24,6 +25,9 @@ namespace api.K_OCR.com {
             services.AddControllers();
 
             services.AddSwaggerGen();
+
+            services.AddTransient<IOCRService, OCRService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +49,13 @@ namespace api.K_OCR.com {
 
 
             app.UseHttpsRedirection();
+
+            app.UseStaticFiles();
+            //app.UseStaticFiles(new StaticFileOptions {
+            //    FileProvider = new PhysicalFileProvider(
+            //            Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
+            //    RequestPath = "/uploads"
+            //});
 
             app.UseRouting();
 

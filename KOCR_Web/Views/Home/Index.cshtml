@@ -72,6 +72,7 @@
             else {
                 var xhr = new XMLHttpRequest();
                 var URL = "/home/DownloadOCR?cacheFileName=" + "@(Model.CacheFilename)" + "&originalFileName=" + "@(Model.OriginalFileName)"
+                http://localhost:5000
                 xhr.open("GET", URL, true);
                 xhr.responseType = "blob";
                 xhr.onload = function (e) {
