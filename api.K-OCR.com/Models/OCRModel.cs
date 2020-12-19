@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
@@ -22,5 +23,7 @@ namespace api.K_OCR.Models {
         public string Avatar { get; set; }
 
         public List<SelectListItem> Languages { get; set; }
+
+        public IFormFile ImageFile { get; set; }
     }
 }

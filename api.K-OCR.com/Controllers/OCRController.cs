@@ -28,6 +28,14 @@ namespace api.K_OCR.Controllers {
             _ocrService = ocrService;
         }
 
+        //public OCRController() {
+        //    IConfigurationBuilder configurationBuilder = new ConfigurationBuilder();
+        //    configurationBuilder.AddJsonFile("AppSettings.json");
+        //    _settings = configurationBuilder.Build();
+
+        //    _ocrService = new OCRService(_settings);
+        //}
+
         // GET: api/<OCRController>
         [HttpGet]
         public IEnumerable<string> Get() {
@@ -44,24 +52,14 @@ namespace api.K_OCR.Controllers {
         [HttpPost]
         [Consumes("multipart/form-data")]
         [RequestSizeLimit(1000000)]
+        //public async Task<OCRModel> Post([FromBody] OCRModel model, IFormFile[] files) {
         public async Task<OCRModel> Post([FromBody] OCRModel model, IFormFile[] files) {
-            //if (files[0].Length > 1000000) {
-            //    ModelState.AddModelError("File was too large.", new FileFormatException()); 
-            //}
-            _debugLogger.Debug($"Entering HomeController.Index()");
+
+            //_debugLogger.Debug($"Entering HomeController.Index()");
             DateTime startTime = DateTime.Now;
 
-            string file = "";
-            try {
-                file = $"{files[0].FileName}";
-            }
-            catch (Exception ex) {
-                _debugLogger.Debug(ex, "Exception reading file name.");
-                throw;
-            }
-
-            _jobLogger.Info($"OCR file {file}");
-            _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Processing file {file}");
+//            _jobLogger.Info($"OCR file {file.FileName}");
+  //          _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Processing file {file.FileName}");
 
 
             // Extract file name from whatever was posted by browser
@@ -88,24 +86,26 @@ namespace api.K_OCR.Controllers {
             // Create new local file and copy contents of uploaded file
             try {
                 using (var localFile = System.IO.File.OpenWrite(imageFilePath))
-                using (var uploadedFile = files[0].OpenReadStream()) {
+                using (var uploadedFile = model.ImageFile.OpenReadStream()) {
                     uploadedFile.CopyTo(localFile);
                 }
             }
             catch (Exception ex) {
-                _debugLogger.Debug($"Couldn't write file {imageFilePath}");
+                //_debugLogger.Debug($"Couldn't write file {imageFilePath}");
                 // HANDLE ERROR
             }
 
             string errorMsg = "";
+            OCRModel responseModel = new OCRModel();  //TEMP
 
-            if (imageFileExtension.ToLower() == ".pdf") {
-                await _ocrService.OCRPDFFile(imageFilePath, textFilePath + ".tif", model.Language);
+            //if (imageFileExtension.ToLower() == ".pdf") {
+            //  await _ocrService.OCRPDFFile(imageFilePath, textFilePath + ".tif", model.Language);
 
-            }
-            else {
-                errorMsg = await _ocrService.OCRImageFile(imageFilePath, textFilePath, model.Language);
-            }
+            //}
+            //else {
+            //errorMsg = await _ocrService.OCRImageFile(imageFilePath, textFilePath, model.Language);
+            errorMsg = await _ocrService.OCRImageFile(imageFilePath, textFilePath, "eng");
+            //}
 
             string textFileName = textFilePath + ".txt";
             string ocrText = "";
@@ -113,7 +113,7 @@ namespace api.K_OCR.Controllers {
                 ocrText = System.IO.File.ReadAllText(textFileName);
             }
             catch (Exception ex) {
-                _debugLogger.Debug($"Couldn't read text file {textFileName}");
+                //_debugLogger.Debug($"Couldn't read text file {textFileName}");
             }
 
             if (ocrText == "") {
@@ -126,10 +126,10 @@ namespace api.K_OCR.Controllers {
             //OCRModel model = new OCRModel();
 
             // update model for display of ocr'ed data
-            model.OCRText = ocrText;
-            model.OriginalFileName = originalFileName;
-            model.CacheFilename = Path.GetFileName(textFileName);
-            model.Languages = _ocrService.SetupLanguages();
+            responseModel.OCRText = ocrText;
+            responseModel.OriginalFileName = originalFileName;
+            responseModel.CacheFilename = Path.GetFileName(textFileName);
+            responseModel.Languages = _ocrService.SetupLanguages();
 
             DateTime finishTime = DateTime.Now;
             TimeSpan ts = (finishTime - startTime);
@@ -137,10 +137,10 @@ namespace api.K_OCR.Controllers {
 
             _ocrService.Cleanup(_settings["ImageFilePath"], _settings["TextFilePath"]);
 
-            _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Finished processing file {file} Elapsed time: {duration}");
+            //_debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Finished processing file {file.FileName} Elapsed time: {duration}");
             //_debugLogger.Debug($"Leaving HomeController.Index()");
 
-            return model;
+            return responseModel;
 
         }
 

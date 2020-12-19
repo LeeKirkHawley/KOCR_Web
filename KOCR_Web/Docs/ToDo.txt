@@ -1,6 +1,4 @@
-﻿CWDocs Delete uploaded documents
-CWDocs upload should end up back at Index
+﻿Remove CWDocs
 More OCR options
 improve UI
 Do something with Privacy link at bottom of page
-Docs - email new user for verification

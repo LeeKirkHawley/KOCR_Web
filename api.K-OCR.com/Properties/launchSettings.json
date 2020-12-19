@@ -19,7 +19,7 @@
     "api.K_OCR": {
       "commandName": "Project",
       "launchBrowser": true,
-      "launchUrl": "weatherforecast",
+      "launchUrl": "OCR",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },

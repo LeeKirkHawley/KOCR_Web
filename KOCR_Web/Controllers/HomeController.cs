@@ -20,6 +20,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Diagnostics;
+using Newtonsoft.Json;
 
 namespace KOCR_Web.Controllers {
     public class HomeController : Controller {
@@ -28,11 +29,16 @@ namespace KOCR_Web.Controllers {
         private readonly Logger _debugLogger;
         private readonly Logger _jobLogger;
         private readonly IWebHostEnvironment _environment;
+        private readonly IHttpContextAccessor _contextAccessor;
 
-        public HomeController(IConfiguration settings, IWebHostEnvironment environment, IOCRService ocrService) {
+        public HomeController(IConfiguration settings, 
+                                IWebHostEnvironment environment, 
+                                IOCRService ocrService, 
+                                IHttpContextAccessor contextAccessor) {
             _settings = settings;
             _ocrService = ocrService;
             _environment = environment;
+            _contextAccessor = contextAccessor;
 
             _jobLogger = LogManager.GetLogger("jobLogger");
             _debugLogger = LogManager.GetLogger("debugLogger");
@@ -81,7 +87,54 @@ namespace KOCR_Web.Controllers {
         [RequestSizeLimit(1000000)]
         public async Task<ActionResult> Index(IndexViewModel model, IFormFile[] files) {
 
+            // Check if the request contains multipart/form-data.
+            if (!Request.ContentType.Contains("multipart/form-data")) {
+                //throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
+            }
 
+            //OCRPostModel ocrPostModel = new OCRPostModel {
+            //    Language = model.Language,
+            //    ImageFile = files[0]
+            //};
+
+            //using (var httpClient = new HttpClient()) {
+
+            //    var requestContent = new MultipartFormDataContent();
+            //    //    here you can specify boundary if you need---^
+            //    var imageContent = new ByteArrayContent(files[0].OpenReadStream());
+            //    imageContent.Headers.ContentType =
+            //        MediaTypeHeaderValue.Parse("image/jpeg");
+
+            //    requestContent.Add(imageContent, "image", "image.jpg");
+
+            //    return await client.PostAsync(url, requestContent);
+
+
+            //    //string json = JsonConvert.SerializeObject(ocrPostModel);
+            //    //StringContent content = new StringContent(json, Encoding.UTF8, "multipart/form-data; boundary=---WebKitFormBoundary7MA4YWxkTrZu0gW");
+
+            //    //using (var response = await httpClient.PostAsync("https://localhost:44344/api/ocr", content)) {
+            //    //    string apiResponse = await response.Content.ReadAsStringAsync();
+            //    //    //var receivedReservation = JsonConvert.DeserializeObject<Reservation>(apiResponse);
+            //    //}
+            //}
+
+            return Content("Hey");
+
+
+            //using (var client = new HttpClient()) {
+            //    client.BaseAddress = new Uri("http://localhost:5000/api/OCR");
+
+            //    //HTTP POST
+            //    StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
+            //    var postTask = client.PostAsync("post", content);
+            //    postTask.Wait();
+
+            //    var result = postTask.Result;
+            //    if (result.IsSuccessStatusCode) {
+            //        return RedirectToAction("Index");
+            //    }
+            //}
 
             //if (files[0].Length > 1000000) {
             //    ModelState.AddModelError("File was too large.", new FileFormatException()); 
@@ -192,7 +245,6 @@ namespace KOCR_Web.Controllers {
             string textFileName = Path.GetFileNameWithoutExtension(originalFileName) + ".txt";
             _debugLogger.Debug($"textFileName: {textFileName}");
 
-            //var path = Path.Combine(_environment.WebRootPath, Path.Combine(Path.Combine(_settings["TextFilePath"], cacheFileName)));
             string path = Path.Combine(_settings["TextFilePath"], cacheFileName);
 
             FileStream fs = null;
