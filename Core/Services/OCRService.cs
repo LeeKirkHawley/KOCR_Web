@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using KOCR_Web.Extensions;
+using Core.Extensions;
 using NLog.Web;
 using NLog;
 using Microsoft.Extensions.Logging;
@@ -15,8 +15,9 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
-using KOCR_Web.Models;
+using Core.Models;
 using System.Runtime.InteropServices.ComTypes;
+using Core.Services;
 
 namespace KOCR_Web.Services {
     public class OCRService : IOCRService {

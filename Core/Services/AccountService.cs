@@ -1,4 +1,5 @@
-﻿using KOCR_Web.Models;
+﻿using Core;
+using Core.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace KOCR_Web.Services {
+namespace Core.Services {
     public class AccountService : IAccountService{
 
         private readonly SQLiteDBContext _context;

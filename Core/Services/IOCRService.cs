@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace api.KOCR.Services {
+namespace Core.Services {
     public interface IOCRService {
         public abstract Task<string> OCRImageFile(string imageName, string outputBase, string language);
         public abstract Task<string> OCRPDFFile(string pdfName, string outputFile, string language);

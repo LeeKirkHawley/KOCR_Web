@@ -19,6 +19,9 @@ using System.Security.Claims;
 using System.Linq.Expressions;
 using KOCR_Web.Extensions;
 using DataTables.AspNet.Core;
+using Core;
+using Core.Services;
+using Core.Models;
 
 namespace KOCR_Web.Controllers {
     public class CWDocsController : Controller {

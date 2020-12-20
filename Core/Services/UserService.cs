@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using KOCR_Web.Models;
+using Core;
+using Core.Models;
+using Core.Services;
 
 namespace KOCR_Web.Services {
 

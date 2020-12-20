@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using KOCR_Web.Models;
 using Microsoft.AspNetCore.Http;
-using KOCR_Web.Services;
+using Core.Services;
 using Microsoft.Extensions.Configuration;
 using NLog.Web;
 using NLog;
@@ -92,53 +92,6 @@ namespace KOCR_Web.Controllers {
                 //throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             }
 
-            //OCRPostModel ocrPostModel = new OCRPostModel {
-            //    Language = model.Language,
-            //    ImageFile = files[0]
-            //};
-
-            //using (var httpClient = new HttpClient()) {
-
-            //    var requestContent = new MultipartFormDataContent();
-            //    //    here you can specify boundary if you need---^
-            //    var imageContent = new ByteArrayContent(files[0].OpenReadStream());
-            //    imageContent.Headers.ContentType =
-            //        MediaTypeHeaderValue.Parse("image/jpeg");
-
-            //    requestContent.Add(imageContent, "image", "image.jpg");
-
-            //    return await client.PostAsync(url, requestContent);
-
-
-            //    //string json = JsonConvert.SerializeObject(ocrPostModel);
-            //    //StringContent content = new StringContent(json, Encoding.UTF8, "multipart/form-data; boundary=---WebKitFormBoundary7MA4YWxkTrZu0gW");
-
-            //    //using (var response = await httpClient.PostAsync("https://localhost:44344/api/ocr", content)) {
-            //    //    string apiResponse = await response.Content.ReadAsStringAsync();
-            //    //    //var receivedReservation = JsonConvert.DeserializeObject<Reservation>(apiResponse);
-            //    //}
-            //}
-
-            return Content("Hey");
-
-
-            //using (var client = new HttpClient()) {
-            //    client.BaseAddress = new Uri("http://localhost:5000/api/OCR");
-
-            //    //HTTP POST
-            //    StringContent content = new StringContent(JsonConvert.SerializeObject(model), Encoding.UTF8, "application/json");
-            //    var postTask = client.PostAsync("post", content);
-            //    postTask.Wait();
-
-            //    var result = postTask.Result;
-            //    if (result.IsSuccessStatusCode) {
-            //        return RedirectToAction("Index");
-            //    }
-            //}
-
-            //if (files[0].Length > 1000000) {
-            //    ModelState.AddModelError("File was too large.", new FileFormatException()); 
-            //}
             _debugLogger.Debug($"Entering HomeController.Index()");
             DateTime startTime = DateTime.Now;
 

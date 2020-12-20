@@ -11,7 +11,6 @@ using System.Text;
 using Newtonsoft.Json;
 using System.Net.Http.Headers;
 using System.IO;
-using api.K_OCR.Models;
 using Microsoft.AspNetCore.Http;
 using Moq;
 using api.K_OCR.Controllers;
@@ -47,7 +46,7 @@ namespace UnitTests {
         }
 
         [Fact]
-        public async Task OCRController_Get_Should_Return_Values() {
+        public void OCRController_Get_Should_Return_Values() {
             var options = new WebApplicationFactoryClientOptions { AllowAutoRedirect = false };
             var client = _factory.CreateClient(options);
             //var fileName = @"C:\\OCR\ex1.png";

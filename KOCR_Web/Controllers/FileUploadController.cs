@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
+using Core;
+using Core.Services;
 
 namespace KOCR_Web.Controllers {
     public class FileUploadController : Controller {

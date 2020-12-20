@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace KOCR_Web.Models {
+namespace Core.Models {
     public class Document {
         [Key]
         [Column("Id")]

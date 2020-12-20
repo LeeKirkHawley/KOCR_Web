@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace KOCR_Web.Services {
+namespace Core.Services {
     public interface IAccountService {
 
         public abstract ClaimsPrincipal Login(string userName, string password);

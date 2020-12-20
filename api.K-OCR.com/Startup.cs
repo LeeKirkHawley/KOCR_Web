@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using api.KOCR.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -25,9 +24,6 @@ namespace api.K_OCR {
             services.AddControllers();
 
             services.AddSwaggerGen();
-
-            services.AddTransient<IOCRService, OCRService>();
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
