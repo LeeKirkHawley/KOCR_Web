@@ -2,6 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core;
+using Core.Services;
+using KOCR_Web.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -24,6 +27,14 @@ namespace api.K_OCR {
             services.AddControllers();
 
             services.AddSwaggerGen();
+
+            services.AddDbContext<SQLiteDBContext>();
+
+            services.AddTransient<IAccountService, AccountService>();
+            services.AddTransient<IUserService, UserService>();
+            services.AddTransient<IOCRService, OCRService>();
+//            services.AddTransient<AccountController>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

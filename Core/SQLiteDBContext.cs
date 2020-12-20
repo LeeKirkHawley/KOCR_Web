@@ -14,6 +14,6 @@ namespace Core {
         //public SQLiteDBContext(DbContextOptions<SQLiteDBContext> options) : base(options) { }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite("Data Source=CWDocs.db");
+            => options.UseSqlite("Data Source=C:\\Work\\KOCR_Web\\KOCR_Web\\CWDocs.db");
     }
 }
