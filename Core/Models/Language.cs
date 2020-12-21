@@ -4,8 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Core.Models {
-    public class Language {
-        public string Text { get; set; }
-        public string Value { get; set; }
+    public record Language {
+        public string Text { get; init; }
+        public string Value { get; init; }
     }
 }

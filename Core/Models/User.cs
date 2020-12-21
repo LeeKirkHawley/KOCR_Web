@@ -6,11 +6,11 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Core.Models {
-    public class User {
+    public record User {
         [Key]
-        public int Id { get; set; }
-        public string userName { get; set; }
-        public string pwd { get; set; }
-        public string role { get; set; }
+        public int Id { get; init; }
+        public string userName { get; init; }
+        public string pwd { get; init; }
+        public string role { get; init; }
     }
 }

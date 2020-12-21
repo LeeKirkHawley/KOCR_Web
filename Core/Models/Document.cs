@@ -6,13 +6,13 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace Core.Models {
-    public class Document {
+    public record Document {
         [Key]
         [Column("Id")]
-        public int fileId { get; set; }
-        public int userId { get; set; }
-        public string originalDocumentName { get; set; }
-        public string documentName { get; set; }
+        public int fileId { get; init; }
+        public int userId { get; init; }
+        public string originalDocumentName { get; init; }
+        public string documentName { get; init; }
 
     }
 }
