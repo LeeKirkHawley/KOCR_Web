@@ -25,4 +25,10 @@
     <ProjectReference Include="..\KOCR_Web\KOCR_Web.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsettings.test.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

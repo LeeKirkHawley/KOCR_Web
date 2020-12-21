@@ -19,7 +19,7 @@ using Core.Models;
 using System.Runtime.InteropServices.ComTypes;
 using Core.Services;
 
-namespace KOCR_Web.Services {
+namespace Core.Services {
     public class OCRService : IOCRService {
 
         private readonly IConfiguration _settings;
@@ -50,6 +50,7 @@ namespace KOCR_Web.Services {
             p.StartInfo.ArgumentList.Add("-l");
             p.StartInfo.ArgumentList.Add(language);
 
+
             string returnMsg = "";
             try {
                 p.Start();
@@ -59,6 +60,10 @@ namespace KOCR_Web.Services {
                     if(errOutput.Contains("Failed loading language")) {  // missing language file
                         _debugLogger.Debug(errOutput);
                         returnMsg =  "ERROR: Couldn't load language file " + language;
+                    }
+                    else {
+                        // there will be another error string, probably with a msg saying dpi wasn't found, etc.
+                        // this actually seems to be a success msg
                     }
                 }
                 await p.WaitForExitAsync(1000000);

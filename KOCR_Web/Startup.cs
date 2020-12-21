@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using KOCR_Web.Services;
+using Core.Services;
 using NLog.Web;
 using NLog;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +42,7 @@ namespace KOCR_Web {
             services.AddTransient<IAccountService, AccountService>();
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<IOCRService, OCRService>();
+
             services.AddTransient<AccountController>();
         }
 

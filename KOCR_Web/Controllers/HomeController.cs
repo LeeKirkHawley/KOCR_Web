@@ -182,7 +182,9 @@ namespace KOCR_Web.Controllers {
             _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Finished processing file {file} Elapsed time: {duration}");
             //_debugLogger.Debug($"Leaving HomeController.Index()");
 
-            return View(model);
+            ViewResult res = View(model);
+            res.StatusCode = 200;
+            return View(res);
         }
 
         [HttpGet]

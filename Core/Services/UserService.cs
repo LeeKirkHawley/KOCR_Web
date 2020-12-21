@@ -6,7 +6,7 @@ using Core;
 using Core.Models;
 using Core.Services;
 
-namespace KOCR_Web.Services {
+namespace Core.Services {
 
     public class UserService : IUserService{
         private readonly SQLiteDBContext _context;

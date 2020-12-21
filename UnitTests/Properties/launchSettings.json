@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "UnitTests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "TESSDATA_PREFIX": "C:\\Program Files\\Tesseract-OCR\\tessdata"
+      }
+    }
+  }
+}

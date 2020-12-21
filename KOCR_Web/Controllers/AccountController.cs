@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using KOCR_Web.Services;
+using Core.Services;
 using KOCR_Web.Models;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;

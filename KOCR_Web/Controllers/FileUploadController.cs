@@ -4,13 +4,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using KOCR_Web.Models;
-using KOCR_Web.Services;
+using Core.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Configuration;
 using Core;
-using Core.Services;
 
 namespace KOCR_Web.Controllers {
     public class FileUploadController : Controller {

@@ -9,7 +9,7 @@ using NLog;
 using System.Threading;
 using System.IO;
 using Microsoft.Extensions.Configuration;
-using KOCR_Web.Services;
+using Core.Services;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Data.Sqlite;
