@@ -4,64 +4,33 @@
     <meta charset="utf-8" />
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
-    <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+    <!--<link rel="stylesheet" href="//cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+    <script src="//cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>-->
     <link rel="stylesheet" href="Console.css" />
+    <link rel="shortcut icon" href="/favicon.ico">
     <title></title>
 </head>
 <body>
     <h1>Console</h1>
-    <div style="width:90%; margin:0 auto;">
-        <table id="docTable" class="table table-striped table-bordered dt-responsive nowrap" width="100%" cellspacing="0">
-            <thead>
-                <tr>
-                    <th>Action</th>
-                    <th>FileId</th>
-                    <th>User</th>
-                    <th>File</th>
-                    <th>File Id</th>
-                    <th>Date Uploaded</th>
-                </tr>
-            </thead>
-        </table>
+    <button id="button" name="button" onclick="buttonClick">Get Data</button>
+    <div name="doc-list" id="doc-list" style="width:90%; margin:0 auto;">
     </div>
 
 </body>
 </html>
 <script>
-    $(document).ready(function () {
-        $('#docTable').DataTable({
-            "processing": true, // for show progress bar
-            "serverSide": true, // for process server side
-            "filter": true, // this is for disable filter (search box)
-            'ajax': {
-                "type": "GET",
-                //"url": '/Home/LoadDocs/',
-                "url": 'https://localhost:44344/Document',
-                "datatype": "json",
-                "data": function (d) {
-                }
-            },
-            //columnDefs: [{ "orderable": false, "searchable": false, "targets": 1 }],
-            columns: [   // this is determining the order of fields in the table
-                {
-                    "render": function (data, type, row, meta) {
-                        // target="_blank" opens file in new window
-                        //return '<a href="/Home/View/' + row.fileId + '" target="_blank">View</a>';
-                        return '<a href="/Home/View/' + row.fileId + '" target="_blank">View</a>'
-                            + ' | '
-                            + '<a style="color: red;" onclick="DeleteDoc(' + row.fileId + ')">Delete</a>';
-                        // using syle here because CWDocsMaster.css isn't being used here for some reason
-                    }
-                },
-                { data: "fileId", name: "fileId" },
-                { data: "userId", name: "userId" },
-                { data: "originalDocumentName", name: "originalDocumentName" },
-                { data: "documentName", name: "documentName" },
-                { data: "documentDate", name: "documentDate" }
-            ]
-        });
+    var element = document.getElementById("button");
+    element.addEventListener("click", function () {
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                //$("#doc-list")[0].innerHTML = xhr.responseText;
+                var docList = document.getElementById("doc-list");
+                docList.innerHTML = xhr.responseText;
+            }
+        }
+        xhr.open('GET', 'https://localhost:44344/Document', true);
+        xhr.send(null);
     });
-
 </script>

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace KOCR_Web.Extensions {
+namespace api.KOCR_Web.Extensions {
     public static class AsyncExtensions {
         /// <summary>
         /// Waits asynchronously for the process to exit.

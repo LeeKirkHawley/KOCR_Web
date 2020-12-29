@@ -15,17 +15,26 @@ using Microsoft.Extensions.Logging;
 
 namespace api.K_OCR {
     public class Startup {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration) {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
+            services.AddCors(options => {
+                options.AddDefaultPolicy(builder =>
+                         //builder.WithOrigins("https://localhost:44349")
+                         builder.AllowAnyOrigin()
+                         .AllowAnyMethod()
+                        .AllowAnyHeader());
+            });
+            //services.AddCors();
             services.AddControllers();
 
             services.AddSwaggerGen();
+
 
             services.AddDbContext<SQLiteDBContext>();
 
@@ -42,6 +51,7 @@ namespace api.K_OCR {
                 app.UseDeveloperExceptionPage();
             }
 
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -54,17 +64,18 @@ namespace api.K_OCR {
             });
 
 
+
+            //app.UseCors("AllowOrigin");
             app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
-            //app.UseStaticFiles(new StaticFileOptions {
-            //    FileProvider = new PhysicalFileProvider(
-            //            Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")),
-            //    RequestPath = "/uploads"
-            //});
-
             app.UseRouting();
-
+            //app.UseCors(x => x
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader()
+            //        .SetIsOriginAllowed(origin => true) // allow any origin
+            //        .AllowCredentials()); // allow credentials
+            app.UseCors();
+            //app.UseStaticFiles();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => {

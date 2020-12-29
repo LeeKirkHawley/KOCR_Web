@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace KOCR_Web.Extensions {
+namespace api.KOCR_Web.Extensions {
     public static class OrderByExtension {
         /// <summary>
         /// Sorts the elements of a sequence according to a key and the sort order.
