@@ -9,15 +9,12 @@ using Core;
 using Core.Services;
 using Core.Models;
 using Microsoft.AspNetCore.Cors;
-//using System.Web.Http.Cors;
 using Newtonsoft;
 using Newtonsoft.Json;
 using api.KOCR_Web.Extensions;
 
 namespace api.K_OCR.Controllers {
     [ApiController]
-    //[Route("[controller]")]
-    //[EnableCors("*", "*", "*")]
     public class DocumentController : Controller {
         private readonly ILogger<DocumentController> _logger;
         private readonly SQLiteDBContext _context;
@@ -29,7 +26,7 @@ namespace api.K_OCR.Controllers {
 
         [HttpGet]
         [Route("Document")]
-        //[EnableCors("AllowAll")]
+        //[DisableCors()]
         public IActionResult Get() {
 
             List<Document> docList = _context.Documents.ToList();

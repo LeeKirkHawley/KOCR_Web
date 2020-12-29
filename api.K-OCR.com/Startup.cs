@@ -25,8 +25,8 @@ namespace api.K_OCR {
         public void ConfigureServices(IServiceCollection services) {
             services.AddCors(options => {
                 options.AddDefaultPolicy(builder =>
-                         //builder.WithOrigins("https://localhost:44349")
-                         builder.AllowAnyOrigin()
+                         builder.WithOrigins("https://localhost:44349")
+                         //builder.AllowAnyOrigin()
                          .AllowAnyMethod()
                         .AllowAnyHeader());
             });
@@ -63,17 +63,9 @@ namespace api.K_OCR {
                 c.RoutePrefix = "";
             });
 
-
-
-            //app.UseCors("AllowOrigin");
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            //app.UseCors(x => x
-            //        .AllowAnyMethod()
-            //        .AllowAnyHeader()
-            //        .SetIsOriginAllowed(origin => true) // allow any origin
-            //        .AllowCredentials()); // allow credentials
             app.UseCors();
             //app.UseStaticFiles();
             app.UseAuthorization();

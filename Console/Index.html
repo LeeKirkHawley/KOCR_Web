@@ -25,7 +25,6 @@
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function () {
             if (xhr.readyState == XMLHttpRequest.DONE) {
-                //$("#doc-list")[0].innerHTML = xhr.responseText;
                 var docList = document.getElementById("doc-list");
                 docList.innerHTML = xhr.responseText;
             }
