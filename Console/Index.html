@@ -13,7 +13,7 @@
 </head>
 <body>
     <h1>Console</h1>
-    <button id="button" name="button" onclick="buttonClick">Get Data</button>
+    <button id="button" name="button">Get Data</button>
     <div name="doc-list" id="doc-list" style="width:90%; margin:0 auto;">
     </div>
 
@@ -27,6 +27,7 @@
             if (xhr.readyState == XMLHttpRequest.DONE) {
                 var docList = document.getElementById("doc-list");
                 docList.innerHTML = xhr.responseText;
+                var obj = JSON.parse(xhr.responseText);
             }
         }
         xhr.open('GET', 'https://localhost:44344/Document', true);

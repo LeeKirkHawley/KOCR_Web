@@ -17,7 +17,7 @@ using System.Data;
 using LinqToDB;
 using System.Security.Claims;
 using System.Linq.Expressions;
-using KOCR_Web.Extensions;
+using Core.Extensions;
 using DataTables.AspNet.Core;
 using Core;
 using Core.Models;
@@ -55,7 +55,7 @@ namespace KOCR_Web.Controllers {
             _ocrService.SetupLanguages();
         }
 
-        public async Task<IActionResult> Index() {
+        public IActionResult Index() {
 
             var user = HttpContext.User.Identities.ToArray()[0];
             if (!user.IsAuthenticated) {
@@ -70,7 +70,7 @@ namespace KOCR_Web.Controllers {
         }
 
         [HttpGet]
-        public async Task<IActionResult> UploadDoc() {
+        public IActionResult UploadDoc() {
 
             var user = HttpContext.User.Identities.ToArray()[0];
             if (!user.IsAuthenticated) {
@@ -142,7 +142,7 @@ namespace KOCR_Web.Controllers {
                     _debugLogger.Info($"Thread {Thread.CurrentThread.ManagedThreadId}: Finished uploading document {file} to {localFile} Elapsed time: {duration}");
                 }
             }
-            catch (Exception ex) {
+            catch (Exception) {
                 _debugLogger.Debug($"Couldn't write file {documentFilePath}");
                 // HANDLE ERROR
             }
@@ -183,7 +183,7 @@ namespace KOCR_Web.Controllers {
             try {
                 _context.SaveChanges();
             }
-            catch (Exception e) {
+            catch (Exception) {
                 throw;
             }
 

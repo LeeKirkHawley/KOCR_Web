@@ -9,7 +9,6 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
 using Core;
-using Core.Services;
 
 namespace KOCR_Web.Controllers {
     public class AccountController : Controller {

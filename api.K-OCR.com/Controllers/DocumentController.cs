@@ -11,7 +11,7 @@ using Core.Models;
 using Microsoft.AspNetCore.Cors;
 using Newtonsoft;
 using Newtonsoft.Json;
-using api.KOCR_Web.Extensions;
+using Core.Extensions;
 
 namespace api.K_OCR.Controllers {
     [ApiController]

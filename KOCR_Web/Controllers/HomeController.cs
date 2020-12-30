@@ -136,7 +136,7 @@ namespace KOCR_Web.Controllers {
                     uploadedFile.CopyTo(localFile);
                 }
             }
-            catch (Exception ex) {
+            catch (Exception) {
                 _debugLogger.Debug($"Couldn't write file {imageFilePath}");
                 // HANDLE ERROR
             }
@@ -156,7 +156,7 @@ namespace KOCR_Web.Controllers {
             try {
                 ocrText = System.IO.File.ReadAllText(textFileName);
             }
-            catch (Exception ex) {
+            catch (Exception) {
                 _debugLogger.Debug($"Couldn't read text file {textFileName}");
             }
 

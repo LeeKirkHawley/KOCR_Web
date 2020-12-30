@@ -7,18 +7,25 @@
 
   <ItemGroup>
     <Compile Remove="Views\NewFolder\**" />
+    <Compile Remove="wwwroot\uploads\**" />
     <Content Remove="Views\NewFolder\**" />
+    <Content Remove="wwwroot\uploads\**" />
     <EmbeddedResource Remove="Views\NewFolder\**" />
+    <EmbeddedResource Remove="wwwroot\uploads\**" />
     <None Remove="Views\NewFolder\**" />
+    <None Remove="wwwroot\uploads\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Extensions\OrderByExtension.cs" />
+    <Compile Remove="Extensions\WaitForExitAsync.cs" />
     <Compile Remove="Infrastructure\DataTables.cs" />
     <Compile Remove="Models\Employee.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="74d945ba-4aa3-4636-83ff-f23999104966.JPG" />
+    <None Remove="internalLog.txt" />
   </ItemGroup>
 
   <ItemGroup>
@@ -45,8 +52,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Extensions\" />
     <Folder Include="Infrastructure\" />
-    <Folder Include="wwwroot\uploads\" />
   </ItemGroup>
 
   <ItemGroup>

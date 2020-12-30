@@ -17,7 +17,6 @@ using KOCR_Web.Controllers;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
 using Core;
-using Core.Services;
 
 namespace KOCR_Web {
     public class Startup {

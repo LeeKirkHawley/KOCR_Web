@@ -16,7 +16,6 @@ using Moq;
 using api.K_OCR.Controllers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Hosting;
-using Core.Services;
 using KOCR_Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
@@ -30,8 +29,8 @@ namespace UnitTests {
 
         private readonly WebApplicationFactory<Startup> _factory;
 
-        private HttpContext _rmContext;
-        private HttpRequest _rmRequest;
+        //private HttpContext _rmContext;
+        //private HttpRequest _rmRequest;
         private Mock<HttpContext> _moqContext;
         private Mock<HttpRequest> _moqRequest;
 
